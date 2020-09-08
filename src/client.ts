@@ -122,6 +122,10 @@ export class HaxanFactory<T = unknown> {
     return JSON.stringify(body);
   }
 
+  send(): Promise<IHaxanResponse<T>> {
+    return this.request();
+  }
+
   async request(): Promise<IHaxanResponse<T>> {
     try {
       let fetchImplementation: (

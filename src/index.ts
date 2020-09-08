@@ -19,4 +19,4 @@ export default (() => {
   };
 })();
 
-export { /*HaxanError, HaxanFactory, */ IHaxanResponse };
+export { IHaxanResponse };

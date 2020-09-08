@@ -2,7 +2,13 @@
   "name": "haxan",
   "version": "0.0.1",
   "description": "Intuitive HTTP client for browsers and servers",
-  "main": "dist/haxan.js",
+  "main": "dist/haxan.min.js",
+  "typings": "build/index.d.ts",
+  "files": [
+    "dist/haxan.min.js",
+    "build/index.d.ts",
+    "build/client.d.ts"
+  ],
   "scripts": {
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --fix --ext .ts",
@@ -13,7 +19,7 @@
     "build": "npm run transpile && npm run build:umd && npm run babel && npm run minify",
     "minify": "uglifyjs dist/haxan.es5.js --compress --mangle > dist/haxan.min.js",
     "prebuild": "rm -rf dist && rm -rf build",
-    "postbuild": "rm -rf build"
+    "postbuild": "rm build/*.js"
   },
   "repository": {
     "type": "git",
