@@ -7,6 +7,13 @@ function isBrowser(): boolean {
   );
 }
 
+interface IHaxanOptions {
+  url: string;
+  method: string;
+  headers: Record<string, string>;
+  query: Record<string, unknown>;
+}
+
 export class HaxanError extends Error {
   isHaxanError = true;
 }
@@ -17,48 +24,53 @@ export interface IHaxanResponse<T> {
   status: number;
 }
 
-export class HaxanFactory<T> {
-  private _url: string;
-  private _method: string = "GET";
-  private _headers: Record<string, string> = {};
-  private _query: Record<string, unknown> = {};
+export class HaxanFactory<T = unknown> {
+  private _opts: IHaxanOptions = {
+    url: "",
+    headers: {},
+    query: {},
+    method: "GET",
+  };
 
-  constructor(url: string) {
-    this._url = url;
+  constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>) {
+    if (opts) {
+      Object.assign(this._opts, opts);
+    }
+    this._opts.url = url;
   }
 
   method(method: string): HaxanFactory<T> {
-    this._method = method;
+    this._opts.method = method;
     return this;
   }
 
-  get() {
+  get(): HaxanFactory<T> {
     return this.method("GET");
   }
 
-  post() {
+  post(): HaxanFactory<T> {
     return this.method("POST");
   }
 
-  put() {
+  put(): HaxanFactory<T> {
     return this.method("PUT");
   }
 
-  patch() {
+  patch(): HaxanFactory<T> {
     return this.method("PATCH");
   }
 
-  delete() {
+  delete(): HaxanFactory<T> {
     return this.method("DELETE");
   }
 
   header(name: string, value: string): HaxanFactory<T> {
-    this._headers[name] = value;
+    this._opts.headers[name] = value;
     return this;
   }
 
   param(name: string, value: unknown): HaxanFactory<T> {
-    this._query[name] = value;
+    this._opts.query[name] = value;
     return this;
   }
 
@@ -75,10 +87,10 @@ export class HaxanFactory<T> {
         fetchImplementation = require("node-fetch");
       }
 
-      const url = `${this._url}?${stringifyQuery(this._query)}`;
+      const url = `${this._opts.url}?${stringifyQuery(this._opts.query)}`;
       const res = await fetchImplementation(url, {
-        method: this._method,
-        headers: this._headers,
+        method: this._opts.method,
+        headers: this._opts.headers,
       });
 
       const contentType = res.headers.get("content-type");
@@ -92,6 +104,7 @@ export class HaxanFactory<T> {
       }
 
       return {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         data: <any>await res.text(),
         ok: res.ok,
         status: res.status,
@@ -102,6 +115,6 @@ export class HaxanFactory<T> {
   }
 }
 
-export function createHaxanFactory<T = any>(url: string): HaxanFactory<T> {
+export function createHaxanFactory<T>(url: string): HaxanFactory<T> {
   return new HaxanFactory(url);
 }
