@@ -1,3 +1,3 @@
-import { Haxan } from "./client";
+import { createHaxanFactory } from "./client";
 
-export default Haxan;
+export default createHaxanFactory;

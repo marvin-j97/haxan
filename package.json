@@ -7,10 +7,12 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --fix --ext .ts",
     "test": "ava test/**/*.spec.ts",
-    "transpile": "tsc",
-    "build:umd": "rollup build/index.js --file dist/haxan.js --format umd --name \"Haxan\"",
-    "build": "npm run transpile && npm run build:umd && npm run minify",
-    "minify": "uglifyjs dist/haxan.js --compress > dist/haxan.min.js",
+    "transpile": "tsc -p build.tsconfig.json",
+    "build:umd": "rollup --config",
+    "babel": "babel dist/haxan.js -o dist/haxan.es5.js",
+    "build": "npm run transpile && npm run build:umd && npm run babel && npm run minify",
+    "minify": "uglifyjs dist/haxan.es5.js --compress --mangle > dist/haxan.min.js",
+    "prebuild": "rm -rf dist && rm -rf build",
     "postbuild": "rm -rf build"
   },
   "repository": {
@@ -25,9 +27,13 @@
   },
   "homepage": "https://github.com/dotvirus/typescript-eslint-ava-template#readme",
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "@types/node": "^14.6.4",
+    "@types/node-fetch": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.6.1",
+    "@typescript-eslint/parser": "^3.10.1",
     "ava": "^3.12.1",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
@@ -46,6 +52,10 @@
     ]
   },
   "dependencies": {
+    "node-fetch": "^2.6.1",
+    "query-string": "^6.13.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "uglify-js": "^3.10.4"
   }
 }
