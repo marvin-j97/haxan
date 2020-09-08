@@ -1,10 +1,14 @@
-import { stringify as stringifyQuery } from "query-string";
-
 function isBrowser(): boolean {
   return (
     typeof window !== "undefined" &&
     {}.toString.call(window) === "[object Window]"
   );
+}
+
+function stringifyQuery(params: Record<string, unknown>) {
+  return Object.keys(params)
+    .map((key) => key + "=" + String(params[key]))
+    .join("&");
 }
 
 interface IHaxanOptions {
