@@ -1,6 +1,16 @@
-import test from "ava";
+import test, { before } from "ava";
+import express from "express";
 
 import haxan from "../src/index";
+
+function reflectBody(req: express.Request, res: express.Response) {
+  console.log("Received request body", req.body);
+  res.json(req.body);
+}
+
+before(() => {
+  express().use(express.json()).post("/", reflectBody).listen(8080);
+});
 
 test("200", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
@@ -33,4 +43,14 @@ test("Error", async (t) => {
   } catch (error) {
     t.is(error.isHaxanError, true);
   }
+});
+
+test("Send post body", async (t) => {
+  const body = { name: "test!", number: 4 };
+  const url = "http://localhost:8080/";
+  const res = await haxan<typeof body>(url).post(body).request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, body);
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
 });

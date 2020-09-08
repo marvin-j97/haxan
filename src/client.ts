@@ -12,6 +12,17 @@ interface IHaxanOptions {
   method: string;
   headers: Record<string, string>;
   query: Record<string, unknown>;
+  body: unknown;
+}
+
+enum HTTPMethods {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+  HEAD = "HEAD",
+  OPTIONS = "OPTIONS",
 }
 
 export class HaxanError extends Error {
@@ -22,6 +33,15 @@ export interface IHaxanResponse<T> {
   data: T;
   ok: boolean;
   status: number;
+  headers: Record<string, string>;
+}
+
+function normalizeHeaders(headers: Headers) {
+  const normalized = {} as Record<string, string>;
+  headers.forEach((v, k) => {
+    normalized[k] = v;
+  });
+  return normalized;
 }
 
 export class HaxanFactory<T = unknown> {
@@ -29,7 +49,8 @@ export class HaxanFactory<T = unknown> {
     url: "",
     headers: {},
     query: {},
-    method: "GET",
+    method: HTTPMethods.GET,
+    body: undefined,
   };
 
   constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>) {
@@ -37,6 +58,14 @@ export class HaxanFactory<T = unknown> {
       Object.assign(this._opts, opts);
     }
     this._opts.url = url;
+  }
+
+  private canHaveBody() {
+    return (<string[]>[
+      HTTPMethods.PUT,
+      HTTPMethods.POST,
+      HTTPMethods.PATCH,
+    ]).includes(this._opts.method.toUpperCase());
   }
 
   method(method: string): HaxanFactory<T> {
@@ -48,15 +77,26 @@ export class HaxanFactory<T = unknown> {
     return this.method("GET");
   }
 
-  post(): HaxanFactory<T> {
+  head(): HaxanFactory<T> {
+    return this.method("HEAD");
+  }
+
+  options(): HaxanFactory<T> {
+    return this.method("OPTIONS");
+  }
+
+  post(body: unknown): HaxanFactory<T> {
+    this._opts.body = body;
     return this.method("POST");
   }
 
-  put(): HaxanFactory<T> {
+  put(body: unknown): HaxanFactory<T> {
+    this._opts.body = body;
     return this.method("PUT");
   }
 
-  patch(): HaxanFactory<T> {
+  patch(body: unknown): HaxanFactory<T> {
+    this._opts.body = body;
     return this.method("PATCH");
   }
 
@@ -72,6 +112,14 @@ export class HaxanFactory<T = unknown> {
   param(name: string, value: unknown): HaxanFactory<T> {
     this._opts.query[name] = value;
     return this;
+  }
+
+  private normalizedBody() {
+    const body = this._opts.body;
+    if (body === null) {
+      return "";
+    }
+    return JSON.stringify(body);
   }
 
   async request(): Promise<IHaxanResponse<T>> {
@@ -90,16 +138,23 @@ export class HaxanFactory<T = unknown> {
       const url = `${this._opts.url}?${stringifyQuery(this._opts.query)}`;
       const res = await fetchImplementation(url, {
         method: this._opts.method,
-        headers: this._opts.headers,
+        headers: {
+          "Content-Type": "application/json",
+          ...this._opts.headers,
+          "X-Http-Client": "Haxan 0.0.1",
+        },
+        body: this.canHaveBody() ? this.normalizedBody() : undefined,
       });
 
       const contentType = res.headers.get("content-type");
+      const resHeaders = normalizeHeaders(res.headers);
 
       if (contentType && contentType.startsWith("application/json")) {
         return {
           data: await res.json(),
           ok: res.ok,
           status: res.status,
+          headers: resHeaders,
         };
       }
 
@@ -108,6 +163,7 @@ export class HaxanFactory<T = unknown> {
         data: <any>await res.text(),
         ok: res.ok,
         status: res.status,
+        headers: resHeaders,
       };
     } catch (error) {
       throw new HaxanError(error);
