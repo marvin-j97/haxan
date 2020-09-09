@@ -2,6 +2,20 @@ export class HaxanError extends Error {
   isHaxanError = true;
 }
 
+export class HaxanRejection extends HaxanError {
+  isRejection = true;
+  response: Response;
+
+  constructor(res: Response) {
+    super();
+    this.response = res;
+  }
+}
+
+export class HaxanAbort extends HaxanError {
+  isAbort = true;
+}
+
 export enum ResponseType {
   Auto = "auto",
   Json = "json",

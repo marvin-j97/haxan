@@ -1,5 +1,11 @@
 import { IHaxanOptions, IHaxanResponse } from "./interfaces";
-import { HTTPMethod, ResponseType, HaxanError } from "./types";
+import {
+  HTTPMethod,
+  ResponseType,
+  HaxanError,
+  HaxanRejection,
+  HaxanAbort,
+} from "./types";
 import {
   isBrowser,
   stringifyQuery,
@@ -15,6 +21,8 @@ export class HaxanFactory<T = unknown> {
     method: HTTPMethod.Get,
     body: undefined,
     type: ResponseType.Auto,
+    rejectOn: () => false,
+    abortSignal: undefined,
   };
 
   constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>) {
@@ -121,7 +129,12 @@ export class HaxanFactory<T = unknown> {
         body: canHaveBody(this._opts.method)
           ? this.normalizedBody()
           : undefined,
+        signal: this._opts.abortSignal,
       });
+
+      if (this._opts.rejectOn(res.status)) {
+        throw new HaxanRejection(res);
+      }
 
       const resHeaders = normalizeHeaders(res.headers);
 
@@ -157,7 +170,13 @@ export class HaxanFactory<T = unknown> {
 
       throw new Error("No valid response body parsing method found");
     } catch (error) {
-      throw new HaxanError(error);
+      if (error.name === "AbortError") {
+        throw new HaxanAbort();
+      }
+      if (error instanceof HaxanError) {
+        throw error;
+      }
+      throw new HaxanError(error.message);
     }
   }
 }
