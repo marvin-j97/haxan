@@ -70,7 +70,7 @@ Haxan("http://localhost:3000/api/user")
 Download a file in Node.js
 
 ```typescript
-Haxan<ReadStream>("https://bit.ly/3k19d8D")
+Haxan<fs.ReadStream>("https://bit.ly/3k19d8D")
   .type(haxan.ResponseType.Stream)
   .send()
   .then((response) => {
