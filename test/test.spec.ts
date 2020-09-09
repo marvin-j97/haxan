@@ -77,7 +77,7 @@ function downloadFile(source: ReadStream, output: string) {
 test.serial("Download file", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
   const res = await haxan<ReadStream>(url)
-    .type(haxan.types.ResponseType.Stream)
+    .type(haxan.ResponseType.Stream)
     .send();
   t.is(res.status, 200);
   t.is(res.ok, true);
