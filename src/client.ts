@@ -14,6 +14,38 @@ import {
   canHaveBody,
 } from "./util";
 
+/**
+ * Request factory, supports both options (given in constructor)
+ * and a chainable API
+ *
+ * ```typescript
+ * // Send a GET request to Google
+ * await Haxan("https://google.com").request();
+ * // .request (alias .send) starts the request
+ *
+ * // Send some JSON payload
+ * const createNoteUrl = "http://localhost:3000/note/my-new-object"
+ * const payload = {
+ *  note: "Test string",
+ *  createdAt: 512525125
+ * }
+ * await Haxan(createNoteUrl).put(payload).send();
+ *
+ * // JSON POST using Option API instead
+ * await Haxan(createNoteUrl, {
+ *   body: payload,
+ *   method: Haxan.HTTPMethod.Post
+ * }).request();
+ *
+ * // Use a different Content-Type instead
+ * await Haxan(createNoteUrl)
+ *   .header("Content-Type", "application/yaml")
+ *   .put(`
+ *   ---
+ *     message: I hope this is valid YAML
+ *   `).send();
+ * ```
+ */
 export class HaxanFactory<T = unknown> {
   private _opts: IHaxanOptions = {
     url: "",
@@ -193,6 +225,9 @@ export class HaxanFactory<T = unknown> {
   }
 }
 
+/**
+ * Creates a new Haxan instance
+ */
 export function createHaxanFactory<T>(
   url: string,
   opts?: Partial<Omit<IHaxanOptions, "url">>,
