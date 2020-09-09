@@ -55,7 +55,8 @@ const payload = {
   id: 4,
   user_name: "@testname",
 };
-Haxan("/api/user")
+
+Haxan("http://localhost:3000/api/user")
   .post(payload)
   .request()
   .then((response) => {
@@ -69,8 +70,7 @@ Haxan("/api/user")
 Download a file in Node.js
 
 ```typescript
-const url = "https://bit.ly/3k19d8D";
-Haxan<ReadStream>(url)
+Haxan<ReadStream>("https://bit.ly/3k19d8D")
   .type(haxan.ResponseType.Stream)
   .send()
   .then((response) => {
