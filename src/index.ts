@@ -3,6 +3,9 @@ import {
   HaxanError,
   HaxanFactory,
   IHaxanResponse,
+  HTTPMethods,
+  IHaxanOptions,
+  ResponseType,
 } from "./client";
 
 export default (() => {
@@ -19,4 +22,4 @@ export default (() => {
   };
 })();
 
-export { IHaxanResponse };
+export { IHaxanResponse, HTTPMethods, IHaxanOptions, ResponseType };

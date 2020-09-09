@@ -11,22 +11,30 @@ function stringifyQuery(params: Record<string, unknown>) {
     .join("&");
 }
 
-interface IHaxanOptions {
+export enum ResponseType {
+  Auto,
+  Json,
+  Text,
+  Stream,
+}
+
+export interface IHaxanOptions {
   url: string;
   method: string;
   headers: Record<string, string>;
   query: Record<string, unknown>;
   body: unknown;
+  type: ResponseType;
 }
 
-enum HTTPMethods {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  PATCH = "PATCH",
-  DELETE = "DELETE",
-  HEAD = "HEAD",
-  OPTIONS = "OPTIONS",
+export enum HTTPMethods {
+  Get = "GET",
+  Post = "POST",
+  Put = "PUT",
+  Patch = "PATCH",
+  Delete = "DELETE",
+  Head = "HEAD",
+  Options = "OPTIONS",
 }
 
 export class HaxanError extends Error {
@@ -53,8 +61,9 @@ export class HaxanFactory<T = unknown> {
     url: "",
     headers: {},
     query: {},
-    method: HTTPMethods.GET,
+    method: HTTPMethods.Get,
     body: undefined,
+    type: ResponseType.Auto,
   };
 
   constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>) {
@@ -66,10 +75,15 @@ export class HaxanFactory<T = unknown> {
 
   private canHaveBody() {
     return (<string[]>[
-      HTTPMethods.PUT,
-      HTTPMethods.POST,
-      HTTPMethods.PATCH,
+      HTTPMethods.Put,
+      HTTPMethods.Post,
+      HTTPMethods.Patch,
     ]).includes(this._opts.method.toUpperCase());
+  }
+
+  type(type: ResponseType): HaxanFactory<T> {
+    this._opts.type = type;
+    return this;
   }
 
   method(method: string): HaxanFactory<T> {
@@ -126,6 +140,14 @@ export class HaxanFactory<T = unknown> {
     return JSON.stringify(body);
   }
 
+  private async parseBody(res: Response): Promise<T> {
+    const contentType = res.headers.get("content-type");
+    if (contentType && contentType.startsWith("application/json")) {
+      return <T>(<unknown>await res.json());
+    }
+    return <T>(<unknown>await res.text());
+  }
+
   send(): Promise<IHaxanResponse<T>> {
     return this.request();
   }
@@ -137,7 +159,9 @@ export class HaxanFactory<T = unknown> {
         init?: RequestInit,
       ) => Promise<Response>;
 
-      if (isBrowser()) {
+      const _isBrowser = isBrowser();
+
+      if (_isBrowser) {
         fetchImplementation = fetch;
       } else {
         fetchImplementation = require("node-fetch");
@@ -149,36 +173,53 @@ export class HaxanFactory<T = unknown> {
         headers: {
           "Content-Type": "application/json",
           ...this._opts.headers,
-          "X-Http-Client": "Haxan 0.0.1",
+          "User-Agent": "Haxan 0.0.1",
         },
         body: this.canHaveBody() ? this.normalizedBody() : undefined,
       });
 
-      const contentType = res.headers.get("content-type");
       const resHeaders = normalizeHeaders(res.headers);
 
-      if (contentType && contentType.startsWith("application/json")) {
+      if (this._opts.type === ResponseType.Auto) {
+        return {
+          data: await this.parseBody(res),
+          ok: res.ok,
+          status: res.status,
+          headers: resHeaders,
+        };
+      } else if (this._opts.type === ResponseType.Json) {
         return {
           data: await res.json(),
           ok: res.ok,
           status: res.status,
           headers: resHeaders,
         };
+      } else if (this._opts.type === ResponseType.Text) {
+        return {
+          data: <T>(<unknown>await res.text()),
+          ok: res.ok,
+          status: res.status,
+          headers: resHeaders,
+        };
+      } else if (this._opts.type === ResponseType.Stream && !_isBrowser) {
+        return {
+          data: <T>(<unknown>res.body),
+          ok: res.ok,
+          status: res.status,
+          headers: resHeaders,
+        };
       }
 
-      return {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data: <any>await res.text(),
-        ok: res.ok,
-        status: res.status,
-        headers: resHeaders,
-      };
+      throw new Error("No valid response body parsing method found");
     } catch (error) {
       throw new HaxanError(error);
     }
   }
 }
 
-export function createHaxanFactory<T>(url: string): HaxanFactory<T> {
-  return new HaxanFactory(url);
+export function createHaxanFactory<T>(
+  url: string,
+  opts?: Partial<Omit<IHaxanOptions, "url">>,
+): HaxanFactory<T> {
+  return new HaxanFactory(url, opts);
 }
