@@ -1,4 +1,4 @@
-import { HTTPMethod } from "types";
+import { HTTPMethod } from "./types";
 
 export function isBrowser(): boolean {
   return (
