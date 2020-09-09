@@ -1,67 +1,18 @@
-function isBrowser(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    {}.toString.call(window) === "[object Window]"
-  );
-}
-
-function stringifyQuery(params: Record<string, unknown>) {
-  return Object.keys(params)
-    .map((key) => key + "=" + String(params[key]))
-    .join("&");
-}
-
-export enum ResponseType {
-  Auto,
-  Json,
-  Text,
-  Stream,
-}
-
-export interface IHaxanOptions {
-  url: string;
-  method: string;
-  headers: Record<string, string>;
-  query: Record<string, unknown>;
-  body: unknown;
-  type: ResponseType;
-}
-
-export enum HTTPMethods {
-  Get = "GET",
-  Post = "POST",
-  Put = "PUT",
-  Patch = "PATCH",
-  Delete = "DELETE",
-  Head = "HEAD",
-  Options = "OPTIONS",
-}
-
-export class HaxanError extends Error {
-  isHaxanError = true;
-}
-
-export interface IHaxanResponse<T> {
-  data: T;
-  ok: boolean;
-  status: number;
-  headers: Record<string, string>;
-}
-
-function normalizeHeaders(headers: Headers) {
-  const normalized = {} as Record<string, string>;
-  headers.forEach((v, k) => {
-    normalized[k] = v;
-  });
-  return normalized;
-}
+import { IHaxanOptions, IHaxanResponse } from "./interfaces";
+import { HTTPMethod, ResponseType, HaxanError } from "./types";
+import {
+  isBrowser,
+  stringifyQuery,
+  normalizeHeaders,
+  canHaveBody,
+} from "./util";
 
 export class HaxanFactory<T = unknown> {
   private _opts: IHaxanOptions = {
     url: "",
     headers: {},
     query: {},
-    method: HTTPMethods.Get,
+    method: HTTPMethod.Get,
     body: undefined,
     type: ResponseType.Auto,
   };
@@ -71,14 +22,6 @@ export class HaxanFactory<T = unknown> {
       Object.assign(this._opts, opts);
     }
     this._opts.url = url;
-  }
-
-  private canHaveBody() {
-    return (<string[]>[
-      HTTPMethods.Put,
-      HTTPMethods.Post,
-      HTTPMethods.Patch,
-    ]).includes(this._opts.method.toUpperCase());
   }
 
   type(type: ResponseType): HaxanFactory<T> {
@@ -132,7 +75,7 @@ export class HaxanFactory<T = unknown> {
     return this;
   }
 
-  private normalizedBody() {
+  private normalizedBody(): string {
     const body = this._opts.body;
     if (body === null) {
       return "";
@@ -175,7 +118,9 @@ export class HaxanFactory<T = unknown> {
           ...this._opts.headers,
           "User-Agent": "Haxan 0.0.1",
         },
-        body: this.canHaveBody() ? this.normalizedBody() : undefined,
+        body: canHaveBody(this._opts.method)
+          ? this.normalizedBody()
+          : undefined,
       });
 
       const resHeaders = normalizeHeaders(res.headers);

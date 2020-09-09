@@ -1,25 +1,18 @@
-import {
-  createHaxanFactory,
-  HaxanError,
-  HaxanFactory,
-  IHaxanResponse,
-  HTTPMethods,
-  IHaxanOptions,
-  ResponseType,
-} from "./client";
+import { createHaxanFactory, HaxanFactory } from "./client";
+import * as types from "./types";
 
 export default (() => {
   const f = createHaxanFactory;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  f.HaxanError = HaxanError;
+  f.types = types;
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   f.HaxanFactory = HaxanFactory;
   return f as typeof createHaxanFactory & {
-    HaxanError: typeof HaxanError;
+    types: typeof types;
     HaxanFactory: typeof HaxanFactory;
   };
 })();
 
-export { IHaxanResponse, HTTPMethods, IHaxanOptions, ResponseType };
+export * from "./interfaces";

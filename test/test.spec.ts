@@ -1,7 +1,7 @@
 import test, { before } from "ava";
 import express from "express";
 
-import haxan, { ResponseType } from "../src/index";
+import haxan from "../src/index";
 import {
   ReadStream,
   createWriteStream,
@@ -76,7 +76,9 @@ function downloadFile(source: ReadStream, output: string) {
 
 test.serial("Download file", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const res = await haxan<ReadStream>(url).type(ResponseType.Stream).send();
+  const res = await haxan<ReadStream>(url)
+    .type(haxan.types.ResponseType.Stream)
+    .send();
   t.is(res.status, 200);
   t.is(res.ok, true);
   const file = "test.json";
