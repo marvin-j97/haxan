@@ -2,6 +2,14 @@ export class HaxanError extends Error {
   isHaxanError = true;
 }
 
+export class HaxanTimeout extends HaxanError {
+  isTimeout = true;
+
+  constructor() {
+    super();
+  }
+}
+
 export class HaxanRejection extends HaxanError {
   isRejection = true;
   response: Response;
@@ -14,6 +22,10 @@ export class HaxanRejection extends HaxanError {
 
 export class HaxanAbort extends HaxanError {
   isAbort = true;
+
+  constructor() {
+    super();
+  }
 }
 
 export enum ResponseType {

@@ -1,5 +1,6 @@
 import test, { before } from "ava";
 import express from "express";
+import AbortController from "abort-controller";
 
 import haxan from "../src/index";
 import {
@@ -16,7 +17,13 @@ function reflectBody(req: express.Request, res: express.Response) {
 }
 
 before(() => {
-  express().use(express.json()).post("/", reflectBody).listen(8080);
+  express()
+    .use(express.json())
+    .get("/no-response", () => {
+      console.log("Not gonna respond");
+    })
+    .post("/", reflectBody)
+    .listen(8080);
 });
 
 test.serial("200", async (t) => {
@@ -86,4 +93,35 @@ test.serial("Download file", async (t) => {
   t.is(existsSync(file), true);
   t.is(JSON.parse(readFileSync(file, "utf-8")).id, 1);
   unlinkSync(file);
+});
+
+test.serial("Timeout", async (t) => {
+  const url = "http://localhost:8080/no-response";
+  t.plan(1);
+  try {
+    await haxan(url).timeout(2000).request();
+  } catch (error) {
+    t.is(error.isHaxanError && error.isTimeout, true);
+  }
+});
+
+test.serial("Abort", (t) => {
+  return new Promise(async (resolve, reject) => {
+    t.plan(1);
+    try {
+      const abortController = new AbortController();
+      setTimeout(() => {
+        abortController.abort();
+      }, 2000);
+
+      const url = "http://localhost:8080/no-response";
+      await haxan(url, {
+        abortSignal: abortController.signal,
+      }).request();
+      reject();
+    } catch (error) {
+      t.is(error.isHaxanError && error.isAbort, true);
+      resolve();
+    }
+  });
 });

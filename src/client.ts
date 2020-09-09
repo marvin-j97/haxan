@@ -5,6 +5,7 @@ import {
   HaxanError,
   HaxanRejection,
   HaxanAbort,
+  HaxanTimeout,
 } from "./types";
 import {
   isBrowser,
@@ -23,6 +24,7 @@ export class HaxanFactory<T = unknown> {
     type: ResponseType.Auto,
     rejectOn: () => false,
     abortSignal: undefined,
+    timeout: 30000,
   };
 
   constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>) {
@@ -83,6 +85,11 @@ export class HaxanFactory<T = unknown> {
     return this;
   }
 
+  timeout(ms: number): HaxanFactory<T> {
+    this._opts.timeout = ms;
+    return this;
+  }
+
   private normalizedBody(): string {
     const body = this._opts.body;
     if (body === null) {
@@ -119,18 +126,23 @@ export class HaxanFactory<T = unknown> {
       }
 
       const url = `${this._opts.url}?${stringifyQuery(this._opts.query)}`;
-      const res = await fetchImplementation(url, {
-        method: this._opts.method,
-        headers: {
-          "Content-Type": "application/json",
-          ...this._opts.headers,
-          "User-Agent": "Haxan 0.0.1",
-        },
-        body: canHaveBody(this._opts.method)
-          ? this.normalizedBody()
-          : undefined,
-        signal: this._opts.abortSignal,
-      });
+      const res = <Response>await Promise.race([
+        fetchImplementation(url, {
+          method: this._opts.method,
+          headers: {
+            "Content-Type": "application/json",
+            ...this._opts.headers,
+            "User-Agent": "Haxan 0.0.1",
+          },
+          body: canHaveBody(this._opts.method)
+            ? this.normalizedBody()
+            : undefined,
+          signal: this._opts.abortSignal,
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new HaxanTimeout()), this._opts.timeout),
+        ),
+      ]);
 
       if (this._opts.rejectOn(res.status)) {
         throw new HaxanRejection(res);
@@ -170,11 +182,11 @@ export class HaxanFactory<T = unknown> {
 
       throw new Error("No valid response body parsing method found");
     } catch (error) {
+      if (error.isHaxanError) {
+        throw error;
+      }
       if (error.name === "AbortError") {
         throw new HaxanAbort();
-      }
-      if (error instanceof HaxanError) {
-        throw error;
       }
       throw new HaxanError(error.message);
     }

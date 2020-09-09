@@ -11,6 +11,7 @@ export interface IHaxanOptions {
   type: ResponseType;
   rejectOn: RejectionFunction;
   abortSignal?: AbortSignal;
+  timeout: number;
 }
 
 export interface IHaxanResponse<T> {
