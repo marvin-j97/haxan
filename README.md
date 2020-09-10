@@ -80,3 +80,15 @@ Haxan<fs.ReadStream>("https://bit.ly/3k19d8D")
     // Handle error
   });
 ```
+
+Sending other kinds of content
+
+```typescript
+// Use a different Content-Type instead
+Haxan("http://localhost:3000/api/note")
+  .header("Content-Type", "text/yaml")
+  .post(`
+  ---
+    message: I hope this is valid YAML
+  `).send();
+```
