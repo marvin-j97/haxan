@@ -4,6 +4,9 @@ Intuitive HTTP client for browsers and Node.js servers.
 
 [![npm version](https://badge.fury.io/js/haxan.svg)](https://badge.fury.io/js/haxan.svg)
 ![Node.js CI](https://github.com/dotvirus/haxan/workflows/Node.js%20CI/badge.svg)
+[![codecov](https://codecov.io/gh/dotvirus/haxan/branch/dev/graph/badge.svg)](https://codecov.io/gh/dotvirus/haxan)
+![David](https://img.shields.io/david/dotvirus/haxan)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/haxan)
 
 ## Installation
 
