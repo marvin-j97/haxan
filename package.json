@@ -1,6 +1,6 @@
 {
   "name": "haxan",
-  "version": "0.0.1-nightly.0",
+  "version": "0.0.1-nightly.1",
   "description": "Intuitive HTTP client for browsers and servers",
   "main": "dist/haxan.min.js",
   "typings": "build/index.d.ts",
@@ -27,7 +27,15 @@
     "type": "git",
     "url": "git+https://github.com/dotvirus/haxan.git"
   },
-  "keywords": [],
+  "keywords": [
+    "http",
+    "ajax",
+    "node",
+    "browser",
+    "xhr",
+    "promise",
+    "fetch"
+  ],
   "author": "dotvirus",
   "license": "ISC",
   "bugs": {
