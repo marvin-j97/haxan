@@ -90,5 +90,12 @@ Haxan("http://localhost:3000/api/note")
   .post(`
   ---
     message: I hope this is valid YAML
-  `).send();
+  `)
+  .send()
+  .then((response) => {
+    // Handle response
+  })
+  .catch((error) => {
+    // Handle error
+  });
 ```
