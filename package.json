@@ -1,13 +1,12 @@
 {
   "name": "haxan",
-  "version": "0.0.1",
+  "version": "0.0.1-nightly.0",
   "description": "Intuitive HTTP client for browsers and servers",
   "main": "dist/haxan.min.js",
   "typings": "build/index.d.ts",
   "files": [
     "dist/haxan.min.js",
-    "build/index.d.ts",
-    "build/client.d.ts"
+    "typings"
   ],
   "scripts": {
     "docs": "typedoc --out docs src",
@@ -20,7 +19,7 @@
     "build": "npm run transpile && npm run build:umd && npm run babel && npm run minify",
     "minify": "uglifyjs dist/haxan.es5.js --compress --mangle > dist/haxan.min.js",
     "prebuild": "rm -rf dist && rm -rf build",
-    "postbuild": "rm build/*.js"
+    "postbuild": "rm -rf build"
   },
   "repository": {
     "type": "git",
