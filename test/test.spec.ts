@@ -115,9 +115,7 @@ test.serial("Abort", (t) => {
       }, 2000);
 
       const url = "http://localhost:8080/no-response";
-      await haxan(url, {
-        abortSignal: abortController.signal,
-      }).request();
+      await haxan(url).abort(abortController.signal).request();
       reject();
     } catch (error) {
       t.is(error.isHaxanError && error.isAbort, true);

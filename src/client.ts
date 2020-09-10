@@ -94,6 +94,11 @@ export class HaxanFactory<T = unknown> {
     return this;
   }
 
+  abort(sig: AbortSignal): HaxanFactory<T> {
+    this._opts.abortSignal = sig;
+    return this;
+  }
+
   private normalizedBody(): string {
     const body = this._opts.body;
     if (body === null) {
