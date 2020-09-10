@@ -40,6 +40,7 @@ Setting query parameters
 ```typescript
 Haxan<string>("http://google.com")
   .param("q", "Elephants") // -> http://google.com/?q=Elephants
+  .request()
   .then((response) => {
     // Handle response
   })
