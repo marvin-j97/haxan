@@ -28,7 +28,7 @@ before(() => {
 
 test.serial("200", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const res = await haxan<string>(url)
+  const res = await haxan(url)
     .param("query", "hello")
     .param("page", 4)
     .request();
@@ -39,7 +39,7 @@ test.serial("200", async (t) => {
 
 test.serial("404", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/15125125";
-  const res = await haxan<string>(url)
+  const res = await haxan(url)
     .param("query", "hello")
     .param("page", 4)
     .request();
@@ -53,7 +53,7 @@ test.serial("Error", async (t) => {
 
   try {
     const url = "https://.typicode.com/todos/15125125";
-    await haxan<string>(url).param("query", "hello").param("page", 4).request();
+    await haxan(url).param("query", "hello").param("page", 4).request();
   } catch (error) {
     t.is(error.isHaxanError, true);
   }

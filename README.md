@@ -38,8 +38,8 @@ Haxan<User>("http://localhost:3000/api/user/1234")
 Setting query parameters
 
 ```typescript
-Haxan<string>("http://google.com")
-  .param("q", "Elephants") // -> http://google.com/?q=Elephants
+Haxan<string>("http://google.com/search")
+  .param("q", "Elephants") // -> http://google.com/search?q=Elephants
   .request()
   .then((response) => {
     // Handle response
@@ -72,7 +72,7 @@ Download a file in Node.js
 
 ```typescript
 Haxan<fs.ReadStream>("https://bit.ly/3k19d8D")
-  .type(haxan.ResponseType.Stream)
+  .type(Haxan.ResponseType.Stream)
   .send()
   .then((response) => {
     response.data.pipe(fs.createWriteStream("punisher.jpeg"));
@@ -88,10 +88,12 @@ Sending other kinds of content
 // Use a different Content-Type instead
 Haxan("http://localhost:3000/api/note")
   .header("Content-Type", "text/yaml")
-  .post(`
+  .post(
+    `
   ---
-    message: I hope this is valid YAML
-  `)
+  message: I hope this is valid YAML
+  `,
+  )
   .send()
   .then((response) => {
     // Handle response
