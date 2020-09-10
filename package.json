@@ -9,7 +9,9 @@
     "typings"
   ],
   "scripts": {
-    "docs": "typedoc --out docs src",
+    "coverage": "nyc npm test",
+    "postcoverage": "nyc report --reporter=json",
+    "doc": "typedoc --out docs src",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --fix --ext .ts",
     "test": "ava test/**/*.spec.ts",
@@ -23,15 +25,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dotvirus/typescript-eslint-ava-template.git"
+    "url": "git+https://github.com/dotvirus/haxan.git"
   },
   "keywords": [],
   "author": "dotvirus",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dotvirus/typescript-eslint-ava-template/issues"
+    "url": "https://github.com/dotvirus/haxan/issues"
   },
-  "homepage": "https://github.com/dotvirus/typescript-eslint-ava-template#readme",
+  "homepage": "https://github.com/dotvirus/haxan#readme",
   "devDependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
@@ -46,6 +48,7 @@
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "express": "^4.17.1",
+    "nyc": "^15.1.0",
     "rollup": "^2.26.11",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",

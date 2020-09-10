@@ -1,5 +1,10 @@
 # Haxan
 
+Intuitive HTTP client for browsers and Node.js servers.
+
+[![npm version](https://badge.fury.io/js/haxan.svg)](https://badge.fury.io/js/haxan.svg)
+![Node.js CI](https://github.com/dotvirus/haxan/workflows/Node.js%20CI/badge.svg)
+
 ## Installation
 
 ```
