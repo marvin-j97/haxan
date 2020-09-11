@@ -1,6 +1,6 @@
 {
   "name": "haxan",
-  "version": "0.0.1-nightly.2",
+  "version": "0.0.1-nightly.3",
   "description": "Intuitive HTTP client for browsers and servers",
   "main": "dist/haxan.min.js",
   "typings": "typings/index.d.ts",
@@ -17,6 +17,7 @@
     "test": "ava test/**/*.spec.ts",
     "pretranspile": "rm -rf typings",
     "transpile": "tsc -p build.tsconfig.json",
+    "posttranspile": "npm run build:typings",
     "build:umd": "rollup --config",
     "build:typings": "rollup --config rollup.dts.config.js",
     "babel": "babel dist/haxan.js -o dist/haxan.es5.js",
