@@ -38,63 +38,73 @@ export class HaxanFactory<T = unknown> {
     this._opts.url = url;
   }
 
-  type(type: ResponseType): HaxanFactory<T> {
+  url(url: string): this {
+    this._opts.url = url;
+    return this;
+  }
+
+  type(type: ResponseType): this {
     this._opts.type = type;
     return this;
   }
 
-  method(method: string): HaxanFactory<T> {
+  method(method: string): this {
     this._opts.method = method;
     return this;
   }
 
-  get(): HaxanFactory<T> {
+  get(): this {
     return this.method("GET");
   }
 
-  head(): HaxanFactory<T> {
+  head(): this {
     return this.method("HEAD");
   }
 
-  options(): HaxanFactory<T> {
+  options(): this {
     return this.method("OPTIONS");
   }
 
-  post(body: unknown): HaxanFactory<T> {
+  post(body: unknown): this {
     this._opts.body = body;
     return this.method("POST");
   }
 
-  put(body: unknown): HaxanFactory<T> {
+  put(body: unknown): this {
     this._opts.body = body;
     return this.method("PUT");
   }
 
-  patch(body: unknown): HaxanFactory<T> {
+  patch(body: unknown): this {
     this._opts.body = body;
     return this.method("PATCH");
   }
 
-  delete(): HaxanFactory<T> {
+  delete(): this {
     return this.method("DELETE");
   }
 
-  header(name: string, value: string): HaxanFactory<T> {
+  body(body: unknown): this {
+    this._opts.body = body;
+    return this;
+  }
+
+  header(name: string, value: string): this {
     this._opts.headers[name] = value;
     return this;
   }
 
-  param(name: string, value: unknown): HaxanFactory<T> {
+  param(name: string, value: unknown): this {
     this._opts.query[name] = value;
     return this;
   }
 
-  timeout(ms: number): HaxanFactory<T> {
+  timeout(ms: number): this {
     this._opts.timeout = ms;
     return this;
   }
 
-  abort(sig: AbortSignal): HaxanFactory<T> {
+  abort(sig: AbortSignal): this {
     this._opts.abortSignal = sig;
     return this;
   }
