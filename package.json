@@ -1,9 +1,9 @@
 {
   "name": "haxan",
-  "version": "0.0.1-nightly.1",
+  "version": "0.0.1-nightly.2",
   "description": "Intuitive HTTP client for browsers and servers",
   "main": "dist/haxan.min.js",
-  "typings": "build/index.d.ts",
+  "typings": "typings/index.d.ts",
   "files": [
     "dist/haxan.min.js",
     "typings"
@@ -15,8 +15,10 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --fix --ext .ts",
     "test": "ava test/**/*.spec.ts",
+    "pretranspile": "rm -rf typings",
     "transpile": "tsc -p build.tsconfig.json",
     "build:umd": "rollup --config",
+    "build:typings": "rollup --config rollup.dts.config.js",
     "babel": "babel dist/haxan.js -o dist/haxan.es5.js",
     "build": "npm run transpile && npm run build:umd && npm run babel && npm run minify",
     "minify": "uglifyjs dist/haxan.es5.js --compress --mangle > dist/haxan.min.js",
@@ -59,6 +61,7 @@
     "nyc": "^15.1.0",
     "rollup": "^2.26.11",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-dts": "^1.4.13",
     "rollup-plugin-node-resolve": "^5.2.0",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
