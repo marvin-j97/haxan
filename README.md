@@ -33,7 +33,7 @@ Haxan<User>("http://localhost:3000/api/user/1234")
   .then((response) => {
     if (response.ok) {
       // Success!
-      console.log(response.data); // Response data
+      console.log(response.data); // Response data -> User
     } else {
       // Some error, but at least we got a response
     }
