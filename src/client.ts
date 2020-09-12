@@ -1,4 +1,4 @@
-import { IHaxanOptions, IHaxanResponse } from "./interfaces";
+import { IHaxanOptions, IHaxanResponse, RejectionFunction } from "./interfaces";
 import {
   HTTPMethod,
   ResponseType,
@@ -35,22 +35,31 @@ export class HaxanFactory<T = unknown> {
     if (opts) {
       Object.assign(this._opts, opts);
     }
-    this._opts.url = url;
+    this.url(url);
+  }
+
+  private setProp<K extends keyof IHaxanOptions>(
+    key: K,
+    value: IHaxanOptions[K],
+  ) {
+    this._opts[key] = value;
+    return this;
+  }
+
+  rejectOn(func: RejectionFunction): this {
+    return this.setProp("rejectOn", func);
   }
 
   url(url: string): this {
-    this._opts.url = url;
-    return this;
+    return this.setProp("url", url);
   }
 
   type(type: ResponseType): this {
-    this._opts.type = type;
-    return this;
+    return this.setProp("type", type);
   }
 
   method(method: string): this {
-    this._opts.method = method;
-    return this;
+    return this.setProp("method", method);
   }
 
   get(): this {
@@ -66,17 +75,17 @@ export class HaxanFactory<T = unknown> {
   }
 
   post(body: unknown): this {
-    this._opts.body = body;
+    this.setProp("body", body);
     return this.method("POST");
   }
 
   put(body: unknown): this {
-    this._opts.body = body;
+    this.setProp("body", body);
     return this.method("PUT");
   }
 
   patch(body: unknown): this {
-    this._opts.body = body;
+    this.setProp("body", body);
     return this.method("PATCH");
   }
 
@@ -85,8 +94,7 @@ export class HaxanFactory<T = unknown> {
   }
 
   body(body: unknown): this {
-    this._opts.body = body;
-    return this;
+    return this.setProp("body", body);
   }
 
   header(name: string, value: string): this {
@@ -100,13 +108,11 @@ export class HaxanFactory<T = unknown> {
   }
 
   timeout(ms: number): this {
-    this._opts.timeout = ms;
-    return this;
+    return this.setProp("timeout", ms);
   }
 
   abort(sig: AbortSignal): this {
-    this._opts.abortSignal = sig;
-    return this;
+    return this.setProp("abortSignal", sig);
   }
 
   private normalizedBody(): string {

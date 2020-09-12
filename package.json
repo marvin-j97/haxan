@@ -1,6 +1,6 @@
 {
   "name": "haxan",
-  "version": "0.0.1-nightly.3",
+  "version": "0.0.1-nightly.4",
   "description": "Intuitive HTTP client for browsers and servers",
   "main": "dist/haxan.min.js",
   "typings": "index.d.ts",

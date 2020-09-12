@@ -1,6 +1,6 @@
 import { ResponseType } from "./types";
 
-type RejectionFunction = (status: number) => boolean;
+export type RejectionFunction = (status: number) => boolean;
 
 export interface IHaxanOptions {
   url: string;
