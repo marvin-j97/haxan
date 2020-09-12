@@ -107,6 +107,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#abort" class="tsd-kind-icon">abort</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#body" class="tsd-kind-icon">body</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#delete" class="tsd-kind-icon">delete</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#head" class="tsd-kind-icon">head</a></li>
@@ -119,10 +120,13 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#patch" class="tsd-kind-icon">patch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#post" class="tsd-kind-icon">post</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#put" class="tsd-kind-icon">put</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#rejecton" class="tsd-kind-icon">reject<wbr>On</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#request" class="tsd-kind-icon">request</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#send" class="tsd-kind-icon">send</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private"><a href="_client_.haxanfactory.html#setprop" class="tsd-kind-icon">set<wbr>Prop</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#timeout" class="tsd-kind-icon">timeout</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_client_.haxanfactory.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
@@ -146,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L32">src/client.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L32">src/client.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -169,13 +173,13 @@
 					<a name="abort" class="tsd-anchor"></a>
 					<h3>abort</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">abort<span class="tsd-signature-symbol">(</span>sig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AbortSignal</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">abort<span class="tsd-signature-symbol">(</span>sig<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AbortSignal</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L97">src/client.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L114">src/client.ts:114</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -184,7 +188,30 @@
 									<h5>sig: <span class="tsd-signature-type">AbortSignal</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="body" class="tsd-anchor"></a>
+					<h3>body</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L96">src/client.ts:96</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>body: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -192,16 +219,16 @@
 					<a name="delete" class="tsd-anchor"></a>
 					<h3>delete</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">delete<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L78">src/client.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L92">src/client.ts:92</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -209,16 +236,16 @@
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L51">src/client.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L65">src/client.ts:65</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -226,16 +253,16 @@
 					<a name="head" class="tsd-anchor"></a>
 					<h3>head</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">head<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">head<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L55">src/client.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L69">src/client.ts:69</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -243,13 +270,13 @@
 					<a name="header" class="tsd-anchor"></a>
 					<h3>header</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">header<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">header<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L82">src/client.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L100">src/client.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -261,7 +288,7 @@
 									<h5>value: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -269,13 +296,13 @@
 					<a name="method" class="tsd-anchor"></a>
 					<h3>method</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L46">src/client.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L61">src/client.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -284,7 +311,7 @@
 									<h5>method: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -298,7 +325,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L102">src/client.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L118">src/client.ts:118</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -309,16 +336,16 @@
 					<a name="options" class="tsd-anchor"></a>
 					<h3>options</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L59">src/client.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L73">src/client.ts:73</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -326,13 +353,13 @@
 					<a name="param" class="tsd-anchor"></a>
 					<h3>param</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L87">src/client.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L105">src/client.ts:105</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -344,7 +371,7 @@
 									<h5>value: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -358,7 +385,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L110">src/client.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L126">src/client.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -375,13 +402,13 @@
 					<a name="patch" class="tsd-anchor"></a>
 					<h3>patch</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">patch<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">patch<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L73">src/client.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L87">src/client.ts:87</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -390,7 +417,7 @@
 									<h5>body: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -398,13 +425,13 @@
 					<a name="post" class="tsd-anchor"></a>
 					<h3>post</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">post<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">post<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L63">src/client.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L77">src/client.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -413,7 +440,7 @@
 									<h5>body: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -421,13 +448,13 @@
 					<a name="put" class="tsd-anchor"></a>
 					<h3>put</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">put<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">put<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L68">src/client.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L82">src/client.ts:82</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -436,7 +463,30 @@
 									<h5>body: <span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="rejecton" class="tsd-anchor"></a>
+					<h3>reject<wbr>On</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">reject<wbr>On<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><a href="../modules/_interfaces_.html#rejectionfunction" class="tsd-signature-type">RejectionFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L49">src/client.ts:49</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>func: <a href="../modules/_interfaces_.html#rejectionfunction" class="tsd-signature-type">RejectionFunction</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -450,7 +500,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L122">src/client.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L138">src/client.ts:138</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ihaxanresponse.html" class="tsd-signature-type">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -467,10 +517,42 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L118">src/client.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L134">src/client.ts:134</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ihaxanresponse.html" class="tsd-signature-type">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+					<a name="setprop" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> set<wbr>Prop</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Prop&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IHaxanOptions</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L41">src/client.ts:41</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><a href="../interfaces/_interfaces_.ihaxanoptions.html" class="tsd-signature-type">IHaxanOptions</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">IHaxanOptions</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -478,13 +560,13 @@
 					<a name="timeout" class="tsd-anchor"></a>
 					<h3>timeout</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">(</span>ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">(</span>ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L92">src/client.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L110">src/client.ts:110</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -493,7 +575,7 @@
 									<h5>ms: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -501,13 +583,13 @@
 					<a name="type" class="tsd-anchor"></a>
 					<h3>type</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../enums/_types_.responsetype.html" class="tsd-signature-type">ResponseType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../enums/_types_.responsetype.html" class="tsd-signature-type">ResponseType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L41">src/client.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L57">src/client.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -516,7 +598,30 @@
 									<h5>type: <a href="../enums/_types_.responsetype.html" class="tsd-signature-type">ResponseType</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_client_.haxanfactory.html" class="tsd-signature-type">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L53">src/client.ts:53</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -529,7 +634,7 @@
 					<div class="tsd-signature tsd-kind-icon">_opts<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L22">src/client.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L22">src/client.ts:22</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -538,17 +643,17 @@
 						<div class="tsd-signature tsd-kind-icon">abort<wbr>Signal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> = undefined</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L30">src/client.ts:30</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L30">src/client.ts:30</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="_opts.body" class="tsd-anchor"></a>
+						<a name="_opts.body-1" class="tsd-anchor"></a>
 						<h3>body</h3>
 						<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> = undefined</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L27">src/client.ts:27</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L27">src/client.ts:27</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -558,7 +663,7 @@
 						<div class="tsd-signature tsd-kind-icon">headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L24">src/client.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L24">src/client.ts:24</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-type-declaration">
@@ -573,7 +678,7 @@
 						<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <a href="../enums/_types_.httpmethod.html" class="tsd-signature-type">HTTPMethod</a><span class="tsd-signature-symbol"> = HTTPMethod.Get</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L26">src/client.ts:26</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L26">src/client.ts:26</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -583,7 +688,7 @@
 						<div class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L25">src/client.ts:25</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L25">src/client.ts:25</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-type-declaration">
@@ -598,7 +703,7 @@
 						<div class="tsd-signature tsd-kind-icon">timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 30000</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L31">src/client.ts:31</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L31">src/client.ts:31</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -608,22 +713,22 @@
 						<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../enums/_types_.responsetype.html#auto" class="tsd-signature-type">Auto</a><span class="tsd-signature-symbol"> = ResponseType.Auto</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L28">src/client.ts:28</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L28">src/client.ts:28</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="_opts.url" class="tsd-anchor"></a>
+						<a name="_opts.url-1" class="tsd-anchor"></a>
 						<h3>url</h3>
 						<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L23">src/client.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L23">src/client.ts:23</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
-						<a name="_opts.rejecton" class="tsd-anchor"></a>
+						<a name="_opts.rejecton-1" class="tsd-anchor"></a>
 						<h3>reject<wbr>On</h3>
 						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal">
 							<li class="tsd-signature tsd-kind-icon">reject<wbr>On<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span></li>
@@ -632,7 +737,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/69e434f/src/client.ts#L29">src/client.ts:29</a></li>
+										<li>Defined in <a href="https://github.com/dotvirus/haxan/blob/cd6a3b7/src/client.ts#L29">src/client.ts:29</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span></h4>
@@ -679,6 +784,9 @@
 								<a href="_client_.haxanfactory.html#abort" class="tsd-kind-icon">abort</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_client_.haxanfactory.html#body" class="tsd-kind-icon">body</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_client_.haxanfactory.html#delete" class="tsd-kind-icon">delete</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -715,16 +823,25 @@
 								<a href="_client_.haxanfactory.html#put" class="tsd-kind-icon">put</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_client_.haxanfactory.html#rejecton" class="tsd-kind-icon">reject<wbr>On</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_client_.haxanfactory.html#request" class="tsd-kind-icon">request</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_client_.haxanfactory.html#send" class="tsd-kind-icon">send</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+								<a href="_client_.haxanfactory.html#setprop" class="tsd-kind-icon">set<wbr>Prop</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_client_.haxanfactory.html#timeout" class="tsd-kind-icon">timeout</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_client_.haxanfactory.html#type" class="tsd-kind-icon">type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_client_.haxanfactory.html#url" class="tsd-kind-icon">url</a>
 							</li>
 							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-private">
 								<a href="_client_.haxanfactory.html#_opts" class="tsd-kind-icon">_opts</a>
