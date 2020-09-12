@@ -102,6 +102,8 @@ interface IHaxanResponse<T> {
 declare class HaxanFactory<T = unknown> {
     private _opts;
     constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>);
+    private setProp;
+    rejectOn(func: RejectionFunction): this;
     url(url: string): this;
     type(type: ResponseType): this;
     method(method: string): this;
@@ -132,4 +134,4 @@ declare const _default: typeof createHaxanFactory & typeof types & {
 };
 
 export default _default;
-export { IHaxanOptions, IHaxanResponse };
+export { IHaxanOptions, IHaxanResponse, RejectionFunction };

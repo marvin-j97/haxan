@@ -369,22 +369,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         Object.assign(this._opts, opts);
       }
 
-      this._opts.url = url;
+      this.url(url);
     }
 
-    HaxanFactory.prototype.url = function (url) {
-      this._opts.url = url;
+    HaxanFactory.prototype.setProp = function (key, value) {
+      this._opts[key] = value;
       return this;
+    };
+
+    HaxanFactory.prototype.rejectOn = function (func) {
+      return this.setProp("rejectOn", func);
+    };
+
+    HaxanFactory.prototype.url = function (url) {
+      return this.setProp("url", url);
     };
 
     HaxanFactory.prototype.type = function (type) {
-      this._opts.type = type;
-      return this;
+      return this.setProp("type", type);
     };
 
     HaxanFactory.prototype.method = function (method) {
-      this._opts.method = method;
-      return this;
+      return this.setProp("method", method);
     };
 
     HaxanFactory.prototype.get = function () {
@@ -400,17 +406,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     HaxanFactory.prototype.post = function (body) {
-      this._opts.body = body;
+      this.setProp("body", body);
       return this.method("POST");
     };
 
     HaxanFactory.prototype.put = function (body) {
-      this._opts.body = body;
+      this.setProp("body", body);
       return this.method("PUT");
     };
 
     HaxanFactory.prototype.patch = function (body) {
-      this._opts.body = body;
+      this.setProp("body", body);
       return this.method("PATCH");
     };
 
@@ -419,8 +425,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     HaxanFactory.prototype.body = function (body) {
-      this._opts.body = body;
-      return this;
+      return this.setProp("body", body);
     };
 
     HaxanFactory.prototype.header = function (name, value) {
@@ -434,13 +439,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     HaxanFactory.prototype.timeout = function (ms) {
-      this._opts.timeout = ms;
-      return this;
+      return this.setProp("timeout", ms);
     };
 
     HaxanFactory.prototype.abort = function (sig) {
-      this._opts.abortSignal = sig;
-      return this;
+      return this.setProp("abortSignal", sig);
     };
 
     HaxanFactory.prototype.normalizedBody = function () {
