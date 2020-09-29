@@ -4,6 +4,7 @@
 declare class HaxanError extends Error {
     isHaxanError: boolean;
 }
+declare function isHaxanError(val: any): val is HaxanError;
 /**
  * Thrown when the timeout limit is reached
  */
@@ -11,6 +12,7 @@ declare class HaxanTimeout extends HaxanError {
     isTimeout: boolean;
     constructor();
 }
+declare function isHaxanTimeout(val: any): val is HaxanError;
 /**
  * Thrown when the custom rejectOn function evaluates to true
  */
@@ -19,6 +21,7 @@ declare class HaxanRejection extends HaxanError {
     response: Response;
     constructor(res: Response);
 }
+declare function isHaxanRejection(val: any): val is HaxanError;
 /**
  * Thrown when the request is aborted
  */
@@ -26,6 +29,7 @@ declare class HaxanAbort extends HaxanError {
     isAbort: boolean;
     constructor();
 }
+declare function isHaxanAbort(val: any): val is HaxanError;
 /**
  * Response modes, defaults to auto.
  *
@@ -55,12 +59,16 @@ declare enum HTTPMethod {
 
 type types_HaxanError = HaxanError;
 declare const types_HaxanError: typeof HaxanError;
+declare const types_isHaxanError: typeof isHaxanError;
 type types_HaxanTimeout = HaxanTimeout;
 declare const types_HaxanTimeout: typeof HaxanTimeout;
+declare const types_isHaxanTimeout: typeof isHaxanTimeout;
 type types_HaxanRejection = HaxanRejection;
 declare const types_HaxanRejection: typeof HaxanRejection;
+declare const types_isHaxanRejection: typeof isHaxanRejection;
 type types_HaxanAbort = HaxanAbort;
 declare const types_HaxanAbort: typeof HaxanAbort;
+declare const types_isHaxanAbort: typeof isHaxanAbort;
 type types_ResponseType = ResponseType;
 declare const types_ResponseType: typeof ResponseType;
 type types_HTTPMethod = HTTPMethod;
@@ -68,9 +76,13 @@ declare const types_HTTPMethod: typeof HTTPMethod;
 declare namespace types {
   export {
     types_HaxanError as HaxanError,
+    types_isHaxanError as isHaxanError,
     types_HaxanTimeout as HaxanTimeout,
+    types_isHaxanTimeout as isHaxanTimeout,
     types_HaxanRejection as HaxanRejection,
+    types_isHaxanRejection as isHaxanRejection,
     types_HaxanAbort as HaxanAbort,
+    types_isHaxanAbort as isHaxanAbort,
     types_ResponseType as ResponseType,
     types_HTTPMethod as HTTPMethod,
   };

@@ -29,6 +29,9 @@
         }
         return HaxanError;
     }(Error));
+    function isHaxanError(val) {
+        return val.isHaxanError === true;
+    }
     /**
      * Thrown when the timeout limit is reached
      */
@@ -41,6 +44,9 @@
         }
         return HaxanTimeout;
     }(HaxanError));
+    function isHaxanTimeout(val) {
+        return val.isHaxanError === true && val.isTimeout === true;
+    }
     /**
      * Thrown when the custom rejectOn function evaluates to true
      */
@@ -54,6 +60,9 @@
         }
         return HaxanRejection;
     }(HaxanError));
+    function isHaxanRejection(val) {
+        return val.isHaxanError === true && val.isRejection === true;
+    }
     /**
      * Thrown when the request is aborted
      */
@@ -66,6 +75,9 @@
         }
         return HaxanAbort;
     }(HaxanError));
+    function isHaxanAbort(val) {
+        return val.isHaxanError === true && val.isAbort === true;
+    }
     /**
      * Response modes, defaults to auto.
      *
@@ -98,9 +110,13 @@
     var types = /*#__PURE__*/Object.freeze({
         __proto__: null,
         HaxanError: HaxanError,
+        isHaxanError: isHaxanError,
         HaxanTimeout: HaxanTimeout,
+        isHaxanTimeout: isHaxanTimeout,
         HaxanRejection: HaxanRejection,
+        isHaxanRejection: isHaxanRejection,
         HaxanAbort: HaxanAbort,
+        isHaxanAbort: isHaxanAbort,
         get ResponseType () { return ResponseType; },
         get HTTPMethod () { return HTTPMethod; }
     });
@@ -224,16 +240,13 @@
             return this.method("OPTIONS");
         };
         HaxanFactory.prototype.post = function (body) {
-            this.setProp("body", body);
-            return this.method("POST");
+            return this.body(body).method("POST");
         };
         HaxanFactory.prototype.put = function (body) {
-            this.setProp("body", body);
-            return this.method("PUT");
+            return this.body(body).method("PUT");
         };
         HaxanFactory.prototype.patch = function (body) {
-            this.setProp("body", body);
-            return this.method("PATCH");
+            return this.body(body).method("PATCH");
         };
         HaxanFactory.prototype.delete = function () {
             return this.method("DELETE");
