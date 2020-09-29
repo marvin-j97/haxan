@@ -5,6 +5,10 @@ export class HaxanError extends Error {
   isHaxanError = true;
 }
 
+export function isHaxanError(val: any): val is HaxanError {
+  return val.isHaxanError === true;
+}
+
 /**
  * Thrown when the timeout limit is reached
  */
@@ -14,6 +18,10 @@ export class HaxanTimeout extends HaxanError {
   constructor() {
     super();
   }
+}
+
+export function isHaxanTimeout(val: any): val is HaxanError {
+  return val.isHaxanError === true && val.isTimeout === true;
 }
 
 /**
@@ -29,6 +37,10 @@ export class HaxanRejection extends HaxanError {
   }
 }
 
+export function isHaxanRejection(val: any): val is HaxanError {
+  return val.isHaxanError === true && val.isRejection === true;
+}
+
 /**
  * Thrown when the request is aborted
  */
@@ -38,6 +50,10 @@ export class HaxanAbort extends HaxanError {
   constructor() {
     super();
   }
+}
+
+export function isHaxanAbort(val: any): val is HaxanError {
+  return val.isHaxanError === true && val.isAbort === true;
 }
 
 /**
