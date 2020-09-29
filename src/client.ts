@@ -75,18 +75,15 @@ export class HaxanFactory<T = unknown> {
   }
 
   post(body: unknown): this {
-    this.setProp("body", body);
-    return this.method("POST");
+    return this.body(body).method("POST");
   }
 
   put(body: unknown): this {
-    this.setProp("body", body);
-    return this.method("PUT");
+    return this.body(body).method("PUT");
   }
 
   patch(body: unknown): this {
-    this.setProp("body", body);
-    return this.method("PATCH");
+    return this.body(body).method("PATCH");
   }
 
   delete(): this {
