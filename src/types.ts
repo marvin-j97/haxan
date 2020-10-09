@@ -3,10 +3,11 @@
  */
 export class HaxanError extends Error {
   isHaxanError = true;
+  [k: string]: unknown;
 }
 
 export function isHaxanError(val: any): val is HaxanError {
-  return val.isHaxanError === true;
+  return val && val.isHaxanError === true;
 }
 
 /**
@@ -21,7 +22,7 @@ export class HaxanTimeout extends HaxanError {
 }
 
 export function isHaxanTimeout(val: any): val is HaxanError {
-  return val.isHaxanError === true && val.isTimeout === true;
+  return isHaxanError(val) && val.isTimeout === true;
 }
 
 /**
@@ -38,7 +39,7 @@ export class HaxanRejection extends HaxanError {
 }
 
 export function isHaxanRejection(val: any): val is HaxanError {
-  return val.isHaxanError === true && val.isRejection === true;
+  return isHaxanError(val) && val.isRejection === true;
 }
 
 /**
@@ -53,7 +54,7 @@ export class HaxanAbort extends HaxanError {
 }
 
 export function isHaxanAbort(val: any): val is HaxanError {
-  return val.isHaxanError === true && val.isAbort === true;
+  return isHaxanError(val) && val.isAbort === true;
 }
 
 /**

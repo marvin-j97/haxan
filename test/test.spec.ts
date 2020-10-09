@@ -10,7 +10,7 @@ import {
   readFileSync,
   unlinkSync,
 } from "fs";
-import { HTTPMethod } from "../src/types";
+import { HTTPMethod, ResponseType } from "../src/types";
 
 function reflectBody(req: express.Request, res: express.Response) {
   console.log("Received request body", req.body);
@@ -20,6 +20,9 @@ function reflectBody(req: express.Request, res: express.Response) {
 before(() => {
   express()
     .use(express.json())
+    .get("/headers", (req, res) => {
+      res.json(req.headers);
+    })
     .get("/no-response", () => {
       console.log("Not gonna respond");
     })
@@ -218,4 +221,40 @@ test.serial("Use rejectOn", async (t) => {
       .request(),
   );
   await t.notThrowsAsync(haxan(url).request());
+});
+
+test.serial("Send header", async (t) => {
+  const url = "http://localhost:8080/headers";
+  const headerKey = "x-test";
+  const headerValue = "12345";
+  const res = await haxan<any>(url).header(headerKey, headerValue).request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.is(res.data[headerKey], headerValue);
+});
+
+test.serial("Send post body, retrieve as .text()", async (t) => {
+  const body = { name: "test!", number: 4 };
+  const url = "http://localhost:8080/";
+  const res = await haxan<string>(url)
+    .post(body)
+    .type(ResponseType.Text)
+    .request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, JSON.stringify(body));
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
+});
+
+test.serial("Send post body, retrieve as .json()", async (t) => {
+  const body = { name: "test!", number: 4 };
+  const url = "http://localhost:8080/";
+  const res = await haxan<typeof body>(url)
+    .post(body)
+    .type(ResponseType.Json)
+    .request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, body);
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
 });
