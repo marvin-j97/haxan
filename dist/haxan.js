@@ -271,7 +271,7 @@
         HaxanFactory.prototype.normalizedBody = function () {
             var body = this._opts.body;
             if (body === null) {
-                return "";
+                return null;
             }
             return JSON.stringify(body);
         };

@@ -467,7 +467,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       var body = this._opts.body;
 
       if (body === null) {
-        return "";
+        return null;
       }
 
       return JSON.stringify(body);
