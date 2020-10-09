@@ -112,10 +112,10 @@ export class HaxanFactory<T = unknown> {
     return this.setProp("abortSignal", sig);
   }
 
-  private normalizedBody(): string {
+  private normalizedBody(): string | null {
     const body = this._opts.body;
     if (body === null) {
-      return "";
+      return null;
     }
     return JSON.stringify(body);
   }

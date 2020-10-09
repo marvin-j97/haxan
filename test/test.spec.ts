@@ -10,6 +10,7 @@ import {
   readFileSync,
   unlinkSync,
 } from "fs";
+import { HTTPMethod } from "../src/types";
 
 function reflectBody(req: express.Request, res: express.Response) {
   console.log("Received request body", req.body);
@@ -22,7 +23,12 @@ before(() => {
     .get("/no-response", () => {
       console.log("Not gonna respond");
     })
+    .use("/method", (req, res) => {
+      res.send(req.method);
+    })
     .post("/", reflectBody)
+    .patch("/", reflectBody)
+    .put("/", reflectBody)
     .listen(8080);
 });
 
@@ -122,4 +128,94 @@ test.serial("Abort", (t) => {
       resolve();
     }
   });
+});
+
+test.serial("Send patch body", async (t) => {
+  const body = { name: "test!", number: 4 };
+  const url = "http://localhost:8080/";
+  const res = await haxan<typeof body>(url).patch(body).request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, body);
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
+});
+
+test.serial("Send delete", async (t) => {
+  const url = "http://localhost:8080/method";
+  t.plan(2);
+  try {
+    const res = await haxan(url).delete().request();
+    t.assert(res.ok);
+    t.is(res.data, HTTPMethod.Delete);
+  } catch (error) {}
+});
+
+test.serial("Send get", async (t) => {
+  const url = "http://localhost:8080/method";
+  t.plan(2);
+  try {
+    const res = await haxan(url).get().request();
+    t.assert(res.ok);
+    t.is(res.data, HTTPMethod.Get);
+  } catch (error) {}
+});
+
+test.serial("Send head", async (t) => {
+  const url = "http://localhost:8080/method";
+  t.plan(2);
+  try {
+    const res = await haxan(url).head().request();
+    t.assert(res.ok);
+    // Express returns empty response body, because it's a HEAD request
+    t.is(res.data, "");
+  } catch (error) {}
+});
+
+test.serial("Send options", async (t) => {
+  const url = "http://localhost:8080/method";
+  t.plan(2);
+  try {
+    const res = await haxan(url).options().request();
+    t.assert(res.ok);
+    t.is(res.data, HTTPMethod.Options);
+  } catch (error) {}
+});
+
+test.serial("Send put body", async (t) => {
+  const body = { name: "test!", number: 4 };
+  const url = "http://localhost:8080/";
+  const res = await haxan<typeof body>(url).put(body).request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, body);
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
+});
+
+test.serial("Send empty body", async (t) => {
+  const url = "http://localhost:8080/";
+  const res = await haxan(url).post(null).request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, {});
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
+});
+
+test.serial("Use options API", async (t) => {
+  const url = "http://localhost:8080/method";
+  t.plan(2);
+  try {
+    const res = await haxan(url, { method: "POST" }).request();
+    t.assert(res.ok);
+    t.is(res.data, HTTPMethod.Post);
+  } catch (error) {}
+});
+
+test.serial("Use rejectOn", async (t) => {
+  const url = "http://localhost:8080/method";
+  await t.throwsAsync(() =>
+    haxan(url)
+      .rejectOn((status) => status === 200)
+      .request(),
+  );
+  await t.notThrowsAsync(haxan(url).request());
 });
