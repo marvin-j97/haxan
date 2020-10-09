@@ -53,7 +53,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }(Error);
 
   function isHaxanError(val) {
-    return val.isHaxanError === true;
+    return val && val.isHaxanError === true;
   }
   /**
    * Thrown when the timeout limit is reached
@@ -76,7 +76,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }(HaxanError);
 
   function isHaxanTimeout(val) {
-    return val.isHaxanError === true && val.isTimeout === true;
+    return isHaxanError(val) && val.isTimeout === true;
   }
   /**
    * Thrown when the custom rejectOn function evaluates to true
@@ -100,7 +100,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }(HaxanError);
 
   function isHaxanRejection(val) {
-    return val.isHaxanError === true && val.isRejection === true;
+    return isHaxanError(val) && val.isRejection === true;
   }
   /**
    * Thrown when the request is aborted
@@ -123,7 +123,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }(HaxanError);
 
   function isHaxanAbort(val) {
-    return val.isHaxanError === true && val.isAbort === true;
+    return isHaxanError(val) && val.isAbort === true;
   }
   /**
    * Response modes, defaults to auto.

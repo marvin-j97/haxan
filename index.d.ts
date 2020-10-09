@@ -3,6 +3,7 @@
  */
 declare class HaxanError extends Error {
     isHaxanError: boolean;
+    [k: string]: unknown;
 }
 declare function isHaxanError(val: any): val is HaxanError;
 /**
