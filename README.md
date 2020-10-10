@@ -7,6 +7,7 @@ Intuitive HTTP client for browsers and Node.js servers.
 [![codecov](https://codecov.io/gh/dotvirus/haxan/branch/dev/graph/badge.svg)](https://codecov.io/gh/dotvirus/haxan)
 ![David](https://img.shields.io/david/dotvirus/haxan)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/haxan)
+![npm](https://img.shields.io/npm/dw/haxan)
 
 ## Installation
 
