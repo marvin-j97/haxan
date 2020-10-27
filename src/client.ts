@@ -1,3 +1,4 @@
+import { VERSION } from "./version";
 import { IHaxanOptions, IHaxanResponse, RejectionFunction } from "./interfaces";
 import {
   HTTPMethod,
@@ -154,7 +155,7 @@ export class HaxanFactory<T = unknown> {
           headers: {
             "Content-Type": "application/json",
             ...this._opts.headers,
-            "User-Agent": "Haxan 0.0.1",
+            "User-Agent": `Haxan ${VERSION}`,
           },
           body: canHaveBody(this._opts.method)
             ? this.normalizedBody()
