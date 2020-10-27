@@ -7,6 +7,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(void 0, function () {
   'use strict';
 
+  var VERSION = "0.0.2";
+
   var __extends = undefined && undefined.__extends || function () {
     var _extendStatics = function extendStatics(d, b) {
       _extendStatics = Object.setPrototypeOf || {
@@ -540,7 +542,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 headers: __assign(__assign({
                   "Content-Type": "application/json"
                 }, this._opts.headers), {
-                  "User-Agent": "Haxan 0.0.1"
+                  "User-Agent": "Haxan " + VERSION
                 }),
                 body: canHaveBody(this._opts.method) ? this.normalizedBody() : undefined,
                 signal: this._opts.abortSignal

@@ -4,6 +4,8 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Haxan = factory());
 }(this, (function () { 'use strict';
 
+    var VERSION = "0.0.2";
+
     var __extends = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
@@ -315,7 +317,7 @@
                             return [4 /*yield*/, Promise.race([
                                     fetchImplementation(url, {
                                         method: this._opts.method,
-                                        headers: __assign(__assign({ "Content-Type": "application/json" }, this._opts.headers), { "User-Agent": "Haxan 0.0.1" }),
+                                        headers: __assign(__assign({ "Content-Type": "application/json" }, this._opts.headers), { "User-Agent": "Haxan " + VERSION }),
                                         body: canHaveBody(this._opts.method)
                                             ? this.normalizedBody()
                                             : undefined,
