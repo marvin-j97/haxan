@@ -7,7 +7,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(void 0, function () {
   'use strict';
 
-  var VERSION = "0.0.2";
+  var VERSION = "0.1.0";
 
   var __extends = undefined && undefined.__extends || function () {
     var _extendStatics = function extendStatics(d, b) {
