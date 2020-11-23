@@ -621,15 +621,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             case 9:
               error_1 = _d.sent();
 
-              if (error_1.isHaxanError) {
-                throw error_1;
-              }
-
               if (error_1.name === "AbortError") {
                 throw new HaxanAbort();
               }
 
-              throw new HaxanError(error_1.message);
+              throw error_1;
 
             case 10:
               return [2
