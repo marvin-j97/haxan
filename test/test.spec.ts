@@ -58,13 +58,14 @@ test.serial("404", async (t) => {
 });
 
 test.serial("Error", async (t) => {
-  t.plan(1);
+  t.plan(2);
 
   try {
     const url = "https://.typicode.com/todos/15125125";
     await haxan(url).param("query", "hello").param("page", 4).request();
   } catch (error) {
-    t.is(error.isHaxanError, true);
+    t.is(error.isHaxanError, undefined);
+    t.is(error.code, "ENOTFOUND");
   }
 });
 

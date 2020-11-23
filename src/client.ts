@@ -3,7 +3,6 @@ import { IHaxanOptions, IHaxanResponse, RejectionFunction } from "./interfaces";
 import {
   HTTPMethod,
   ResponseType,
-  HaxanError,
   HaxanRejection,
   HaxanAbort,
   HaxanTimeout,
@@ -205,13 +204,10 @@ export class HaxanFactory<T = unknown> {
 
       throw new Error("No valid response body parsing method found");
     } catch (error) {
-      if (error.isHaxanError) {
-        throw error;
-      }
       if (error.name === "AbortError") {
         throw new HaxanAbort();
       }
-      throw new HaxanError(error.message);
+      throw error;
     }
   }
 }
