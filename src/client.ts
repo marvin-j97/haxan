@@ -147,7 +147,10 @@ export class HaxanFactory<T = unknown> {
         fetchImplementation = require("node-fetch");
       }
 
-      const url = `${this._opts.url}?${stringifyQuery(this._opts.query)}`;
+      const url = Object.keys(this._opts.query).length
+        ? `${this._opts.url}?${stringifyQuery(this._opts.query)}`
+        : this._opts.url;
+
       const res = <Response>await Promise.race([
         fetchImplementation(url, {
           method: this._opts.method,
