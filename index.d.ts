@@ -134,7 +134,9 @@ declare class HaxanFactory<T = unknown> {
     abort(sig: AbortSignal): this;
     private normalizedBody;
     private parseBody;
+    getOptions(): IHaxanOptions;
     send(): Promise<IHaxanResponse<T>>;
+    execute(): Promise<IHaxanResponse<T>>;
     request(): Promise<IHaxanResponse<T>>;
 }
 /**

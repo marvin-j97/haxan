@@ -4,7 +4,7 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
 }(this, (function (exports) { 'use strict';
 
-    var VERSION = "0.1.2";
+    var VERSION = "0.2.0";
 
     var __extends = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -293,7 +293,13 @@
                 });
             });
         };
+        HaxanFactory.prototype.getOptions = function () {
+            return this._opts;
+        };
         HaxanFactory.prototype.send = function () {
+            return this.execute();
+        };
+        HaxanFactory.prototype.execute = function () {
             return this.request();
         };
         HaxanFactory.prototype.request = function () {

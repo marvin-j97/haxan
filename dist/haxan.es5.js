@@ -7,7 +7,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(void 0, function (exports) {
   'use strict';
 
-  var VERSION = "0.1.2";
+  var VERSION = "0.2.0";
 
   var __extends = undefined && undefined.__extends || function () {
     var _extendStatics = function extendStatics(d, b) {
@@ -508,7 +508,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       });
     };
 
+    HaxanFactory.prototype.getOptions = function () {
+      return this._opts;
+    };
+
     HaxanFactory.prototype.send = function () {
+      return this.execute();
+    };
+
+    HaxanFactory.prototype.execute = function () {
       return this.request();
     };
 
