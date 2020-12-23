@@ -128,7 +128,15 @@ export class HaxanFactory<T = unknown> {
     return <T>(<unknown>await res.text());
   }
 
+  getOptions(): IHaxanOptions {
+    return this._opts;
+  }
+
   send(): Promise<IHaxanResponse<T>> {
+    return this.execute();
+  }
+
+  execute(): Promise<IHaxanResponse<T>> {
     return this.request();
   }
 
