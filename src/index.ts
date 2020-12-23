@@ -18,3 +18,4 @@ export default (() => {
 })();
 
 export * from "./interfaces";
+export { HaxanFactory };
