@@ -1,10 +1,10 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Haxan = factory());
-}(this, (function () { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
+}(this, (function (exports) { 'use strict';
 
-    var VERSION = "0.1.0";
+    var VERSION = "0.1.1";
 
     var __extends = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -403,6 +403,9 @@
         return f;
     })();
 
-    return index;
+    exports.HaxanFactory = HaxanFactory;
+    exports.default = index;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
