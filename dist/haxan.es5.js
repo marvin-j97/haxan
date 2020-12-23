@@ -3,11 +3,11 @@
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function (global, factory) {
-  (typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Haxan = factory());
-})(void 0, function () {
+  (typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
+})(void 0, function (exports) {
   'use strict';
 
-  var VERSION = "0.1.0";
+  var VERSION = "0.1.1";
 
   var __extends = undefined && undefined.__extends || function () {
     var _extendStatics = function extendStatics(d, b) {
@@ -662,5 +662,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return f;
   }();
 
-  return index;
+  exports.HaxanFactory = HaxanFactory;
+  exports["default"] = index;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
 });
