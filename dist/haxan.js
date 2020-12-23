@@ -4,7 +4,7 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
 }(this, (function (exports) { 'use strict';
 
-    var VERSION = "0.1.1";
+    var VERSION = "0.1.2";
 
     var __extends = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -313,7 +313,9 @@
                             else {
                                 fetchImplementation = require("node-fetch");
                             }
-                            url = this._opts.url + "?" + stringifyQuery(this._opts.query);
+                            url = Object.keys(this._opts.query).length
+                                ? this._opts.url + "?" + stringifyQuery(this._opts.query)
+                                : this._opts.url;
                             return [4 /*yield*/, Promise.race([
                                     fetchImplementation(url, {
                                         method: this._opts.method,
