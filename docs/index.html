@@ -86,7 +86,7 @@
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Haxan <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;haxan&quot;</span>;
 
 <span class="hljs-keyword">interface</span> User {
-  id: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
   name: <span class="hljs-built_in">string</span>;
 }
 
@@ -115,8 +115,8 @@ Haxan&lt;User&gt;(<span class="hljs-string">&quot;http://localhost:3000/api/user
   });</code></pre>
 				<p>Sending a JSON payload with <code>POST</code></p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> payload = {
-  id: <span class="hljs-number">4</span>,
-  user_name: <span class="hljs-string">&quot;@testname&quot;</span>,
+  <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>,
+  <span class="hljs-attr">user_name</span>: <span class="hljs-string">&quot;@testname&quot;</span>,
 };
 
 Haxan(<span class="hljs-string">&quot;http://localhost:3000/api/user&quot;</span>)
