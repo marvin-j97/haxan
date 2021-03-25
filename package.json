@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dotvirus/haxan.git"
+    "url": "git+https://github.com/marvin-j97/haxan.git"
   },
   "keywords": [
     "http",
@@ -39,12 +39,12 @@
     "promise",
     "fetch"
   ],
-  "author": "dotvirus",
+  "author": "marvin-j97",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dotvirus/haxan/issues"
+    "url": "https://github.com/marvin-j97/haxan/issues"
   },
-  "homepage": "https://github.com/dotvirus/haxan#readme",
+  "homepage": "https://github.com/marvin-j97/haxan#readme",
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
