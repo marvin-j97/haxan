@@ -14,7 +14,12 @@ import { HTTPMethod, ResponseType } from "../src/types";
 
 function reflectBody(req: express.Request, res: express.Response) {
   console.log("Received request body", req.body);
-  res.json(req.body);
+  if (typeof req.body === "string") {
+    res.send(req.body);
+  }
+  else {
+    res.json(req.body); 
+  }
 }
 
 before(() => {
@@ -67,6 +72,16 @@ test.serial("Error", async (t) => {
     t.is(error.isHaxanError, undefined);
     t.is(error.code, "ENOTFOUND");
   }
+});
+
+test.serial("Send raw body", async (t) => {
+  const body = "abcdef";
+  const url = "http://localhost:8080/";
+  const res = await haxan<string>(url).post(body).request();
+  t.is(res.status, 200);
+  t.is(res.ok, true);
+  t.deepEqual(res.data, body);
+  t.is(res.headers["content-type"].startsWith("application/json"), true);
 });
 
 test.serial("Send post body", async (t) => {
