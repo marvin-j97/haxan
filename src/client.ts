@@ -117,6 +117,9 @@ export class HaxanFactory<T = unknown> {
     if (body === null) {
       return null;
     }
+    if (typeof body === "string") {
+      return body; 
+    }
     return JSON.stringify(body);
   }
 
