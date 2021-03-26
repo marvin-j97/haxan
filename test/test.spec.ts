@@ -14,12 +14,7 @@ import { HTTPMethod, ResponseType } from "../src/types";
 
 function reflectBody(req: express.Request, res: express.Response) {
   console.log("Received request body", req.body);
-  if (typeof req.body === "string") {
-    res.send(req.body);
-  }
-  else {
-    res.json(req.body); 
-  }
+  res.json(req.body); 
 }
 
 before(() => {
@@ -74,18 +69,20 @@ test.serial("Error", async (t) => {
   }
 });
 
+const testBody = { name: "test!", number: 4 };
+
 test.serial("Send raw body", async (t) => {
-  const body = "abcdef";
+  const body = JSON.stringify(testBody);
   const url = "http://localhost:8080/";
-  const res = await haxan<string>(url).post(body).request();
+  const res = await haxan<typeof testBody>(url).post(body).request();
   t.is(res.status, 200);
   t.is(res.ok, true);
-  t.deepEqual(res.data, body);
+  t.deepEqual(res.data, testBody);
   t.is(res.headers["content-type"].startsWith("application/json"), true);
 });
 
-test.serial("Send post body", async (t) => {
-  const body = { name: "test!", number: 4 };
+test.serial("Send post body as object", async (t) => {
+  const body = testBody;
   const url = "http://localhost:8080/";
   const res = await haxan<typeof body>(url).post(body).request();
   t.is(res.status, 200);
