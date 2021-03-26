@@ -4,7 +4,7 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
 }(this, (function (exports) { 'use strict';
 
-    var VERSION = "0.2.0";
+    var VERSION = "0.2.1";
 
     var __extends = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
