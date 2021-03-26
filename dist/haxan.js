@@ -275,6 +275,9 @@
             if (body === null) {
                 return null;
             }
+            if (typeof body === "string") {
+                return body;
+            }
             return JSON.stringify(body);
         };
         HaxanFactory.prototype.parseBody = function (res) {

@@ -472,6 +472,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         return null;
       }
 
+      if (typeof body === "string") {
+        return body;
+      }
+
       return JSON.stringify(body);
     };
 
