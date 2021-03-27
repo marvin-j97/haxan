@@ -1,15 +1,17 @@
-# Haxan
+<h1 align="center">Haxan</h1>
+
+<p align="center">
+  <img src="https://badge.fury.io/js/haxan.svg" alt="Build Status">
+  <img src="https://github.com/marvin-j97/haxan/workflows/Node.js%20CI/badge.svg" alt="Build Status">
+  <img src="https://codecov.io/gh/marvin-j97/haxan/branch/dev/graph/badge.svg" alt="Build Status">
+  <img src="https://img.shields.io/david/dotvirus/haxan" alt="Build Status">
+  <img src="https://img.shields.io/bundlephobia/minzip/haxan" alt="Build Status">
+  <img src="https://img.shields.io/npm/dw/haxan" alt="Build Status">
+</p>
 
 Intuitive HTTP client for browsers and Node.js servers.
 
-[![npm version](https://badge.fury.io/js/haxan.svg)](https://badge.fury.io/js/haxan.svg)
-![Node.js CI](https://github.com/marvin-j97/haxan/workflows/Node.js%20CI/badge.svg)
-[![codecov](https://codecov.io/gh/marvin-j97/haxan/branch/dev/graph/badge.svg)](https://codecov.io/gh/marvin-j97/haxan)
-![David](https://img.shields.io/david/dotvirus/haxan)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/haxan)
-![npm](https://img.shields.io/npm/dw/haxan)
-
-## Installation
+### Installation
 
 ```
 npm i haxan
@@ -17,7 +19,7 @@ npm i haxan
 
 Or use the .min.js bundle.
 
-## Examples
+### Examples
 
 Using `GET` to fetch a user from an API
 
@@ -103,6 +105,29 @@ Haxan("http://localhost:3000/api/note")
   message: I hope this is valid YAML
   `,
   )
+  .send()
+  .then((response) => {
+    // Handle response
+  })
+  .catch((error) => {
+    // Handle error
+  });
+```
+
+Easily compose requests without complicated option merging (example code)
+
+```typescript
+import Haxan, { HaxanFactory } from "haxan";
+
+function signRequest(url: string): HaxanFactory {
+  return Haxan(url)
+    .header("x-session", getUserSession())
+    .header("x-csrf", getCsrfToken());
+}
+
+signRequest("/api/v1/endpoint")
+  // .header(...) - add more headers if needed
+  .post(payload)
   .send()
   .then((response) => {
     // Handle response
