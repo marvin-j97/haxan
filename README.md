@@ -3,7 +3,9 @@
 <p align="center">
   <img src="https://badge.fury.io/js/haxan.svg" alt="Build Status">
   <img src="https://github.com/marvin-j97/haxan/workflows/Node.js%20CI/badge.svg" alt="Build Status">
-  <img src="https://codecov.io/gh/marvin-j97/haxan/branch/dev/graph/badge.svg" alt="Build Status">
+  <a href="https://codecov.io/gh/marvin-j97/haxan">
+    <img src="https://codecov.io/gh/marvin-j97/haxan/branch/dev/graph/badge.svg?token=HG18ZHO57K"/>
+  </a>
   <img src="https://img.shields.io/david/dotvirus/haxan" alt="Build Status">
   <img src="https://img.shields.io/bundlephobia/minzip/haxan" alt="Build Status">
   <img src="https://img.shields.io/npm/dw/haxan" alt="Build Status">
