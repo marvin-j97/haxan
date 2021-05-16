@@ -45,24 +45,6 @@ declare enum HTTPMethod {
     Head = "HEAD",
     Options = "OPTIONS"
 }
-
-type types_ResponseType = ResponseType;
-declare const types_ResponseType: typeof ResponseType;
-type types_HTTPMethod = HTTPMethod;
-declare const types_HTTPMethod: typeof HTTPMethod;
-type types_HaxanErrorType = HaxanErrorType;
-declare const types_HaxanErrorType: typeof HaxanErrorType;
-type types_HaxanError<_0> = HaxanError<_0>;
-declare const types_HaxanError: typeof HaxanError;
-declare namespace types {
-  export {
-    types_ResponseType as ResponseType,
-    types_HTTPMethod as HTTPMethod,
-    types_HaxanErrorType as HaxanErrorType,
-    types_HaxanError as HaxanError,
-  };
-}
-
 interface IHaxanOptions {
     url: string;
     method: string;
@@ -78,6 +60,27 @@ interface IHaxanResponse<T> {
     ok: boolean;
     status: number;
     headers: Record<string, string>;
+}
+
+type types_ResponseType = ResponseType;
+declare const types_ResponseType: typeof ResponseType;
+type types_HTTPMethod = HTTPMethod;
+declare const types_HTTPMethod: typeof HTTPMethod;
+type types_IHaxanOptions = IHaxanOptions;
+type types_IHaxanResponse<_0> = IHaxanResponse<_0>;
+type types_HaxanErrorType = HaxanErrorType;
+declare const types_HaxanErrorType: typeof HaxanErrorType;
+type types_HaxanError<_0> = HaxanError<_0>;
+declare const types_HaxanError: typeof HaxanError;
+declare namespace types {
+  export {
+    types_ResponseType as ResponseType,
+    types_HTTPMethod as HTTPMethod,
+    types_IHaxanOptions as IHaxanOptions,
+    types_IHaxanResponse as IHaxanResponse,
+    types_HaxanErrorType as HaxanErrorType,
+    types_HaxanError as HaxanError,
+  };
 }
 
 /**
@@ -123,4 +126,4 @@ declare const _default: typeof createHaxanFactory & typeof types & {
 };
 
 export default _default;
-export { HaxanFactory, IHaxanOptions, IHaxanResponse };
+export { HTTPMethod, HaxanError, HaxanErrorType, HaxanFactory, IHaxanOptions, IHaxanResponse, ResponseType };

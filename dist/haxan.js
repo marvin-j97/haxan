@@ -6,13 +6,13 @@
 
     var VERSION = "0.3.0";
 
-    var HaxanErrorType;
+    exports.HaxanErrorType = void 0;
     (function (HaxanErrorType) {
         HaxanErrorType["NetworkError"] = "NetworkError";
         HaxanErrorType["ParseError"] = "ParseError";
         HaxanErrorType["Timeout"] = "Timeout";
         HaxanErrorType["Abort"] = "Abort";
-    })(HaxanErrorType || (HaxanErrorType = {}));
+    })(exports.HaxanErrorType || (exports.HaxanErrorType = {}));
     /**
      * Thrown on internal errors
      */
@@ -52,17 +52,17 @@
      *
      * Stream is only usable in Node.js
      */
-    var ResponseType;
+    exports.ResponseType = void 0;
     (function (ResponseType) {
         ResponseType["Auto"] = "auto";
         ResponseType["Json"] = "json";
         ResponseType["Text"] = "text";
         ResponseType["Stream"] = "stream";
-    })(ResponseType || (ResponseType = {}));
+    })(exports.ResponseType || (exports.ResponseType = {}));
     /**
      * HTTP methods
      */
-    var HTTPMethod;
+    exports.HTTPMethod = void 0;
     (function (HTTPMethod) {
         HTTPMethod["Get"] = "GET";
         HTTPMethod["Post"] = "POST";
@@ -71,13 +71,13 @@
         HTTPMethod["Delete"] = "DELETE";
         HTTPMethod["Head"] = "HEAD";
         HTTPMethod["Options"] = "OPTIONS";
-    })(HTTPMethod || (HTTPMethod = {}));
+    })(exports.HTTPMethod || (exports.HTTPMethod = {}));
 
     var types = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        get ResponseType () { return ResponseType; },
-        get HTTPMethod () { return HTTPMethod; },
-        get HaxanErrorType () { return HaxanErrorType; },
+        get ResponseType () { return exports.ResponseType; },
+        get HTTPMethod () { return exports.HTTPMethod; },
+        get HaxanErrorType () { return exports.HaxanErrorType; },
         HaxanError: HaxanError
     });
 
@@ -99,9 +99,9 @@
     }
     function canHaveBody(method) {
         return [
-            HTTPMethod.Put,
-            HTTPMethod.Post,
-            HTTPMethod.Patch,
+            exports.HTTPMethod.Put,
+            exports.HTTPMethod.Post,
+            exports.HTTPMethod.Patch,
         ].includes(method.toUpperCase());
     }
 
@@ -155,7 +155,7 @@
     function timeout(timeMs) {
         return new Promise(function (_resolve, reject) {
             return setTimeout(function () {
-                return reject(new HaxanError(HaxanErrorType.Timeout, "Request timed out (Reached " + timeMs + "ms)", null));
+                return reject(new HaxanError(exports.HaxanErrorType.Timeout, "Request timed out (Reached " + timeMs + "ms)", null));
             }, timeMs);
         });
     }
@@ -169,9 +169,9 @@
                 url: "",
                 headers: {},
                 query: {},
-                method: HTTPMethod.Get,
+                method: exports.HTTPMethod.Get,
                 body: undefined,
-                type: ResponseType.Auto,
+                type: exports.ResponseType.Auto,
                 abortSignal: undefined,
                 timeout: 30000,
             };
@@ -275,7 +275,7 @@
                         case 0:
                             _d.trys.push([0, 8, , 9]);
                             resHeaders = normalizeHeaders(res.headers);
-                            if (!(this._opts.type === ResponseType.Auto)) return [3 /*break*/, 2];
+                            if (!(this._opts.type === exports.ResponseType.Auto)) return [3 /*break*/, 2];
                             _a = {};
                             return [4 /*yield*/, this.parseBody(res)];
                         case 1: return [2 /*return*/, (_a.data = _d.sent(),
@@ -284,7 +284,7 @@
                                 _a.headers = resHeaders,
                                 _a)];
                         case 2:
-                            if (!(this._opts.type === ResponseType.Json)) return [3 /*break*/, 4];
+                            if (!(this._opts.type === exports.ResponseType.Json)) return [3 /*break*/, 4];
                             _b = {};
                             return [4 /*yield*/, res.json()];
                         case 3: return [2 /*return*/, (_b.data = _d.sent(),
@@ -293,7 +293,7 @@
                                 _b.headers = resHeaders,
                                 _b)];
                         case 4:
-                            if (!(this._opts.type === ResponseType.Text)) return [3 /*break*/, 6];
+                            if (!(this._opts.type === exports.ResponseType.Text)) return [3 /*break*/, 6];
                             _c = {};
                             return [4 /*yield*/, res.text()];
                         case 5: return [2 /*return*/, (_c.data = (_d.sent()),
@@ -302,7 +302,7 @@
                                 _c.headers = resHeaders,
                                 _c)];
                         case 6:
-                            if (this._opts.type === ResponseType.Stream && !isBrowser()) {
+                            if (this._opts.type === exports.ResponseType.Stream && !isBrowser()) {
                                 return [2 /*return*/, {
                                         data: res.body,
                                         ok: res.ok,
@@ -311,7 +311,7 @@
                                     }];
                             }
                             _d.label = 7;
-                        case 7: throw new HaxanError(HaxanErrorType.ParseError, "No valid response body parsing method found", null, {
+                        case 7: throw new HaxanError(exports.HaxanErrorType.ParseError, "No valid response body parsing method found", null, {
                             data: res.body,
                             ok: res.ok,
                             status: res.status,
@@ -358,9 +358,9 @@
                             _error_1 = _a.sent();
                             error = _error_1;
                             if (error.name === "AbortError") {
-                                throw new HaxanError(HaxanErrorType.Abort, "Request aborted", error);
+                                throw new HaxanError(exports.HaxanErrorType.Abort, "Request aborted", error);
                             }
-                            throw new HaxanError(HaxanErrorType.NetworkError, "Network error", error);
+                            throw new HaxanError(exports.HaxanErrorType.NetworkError, "Network error", error);
                         case 4: return [2 /*return*/];
                     }
                 });
@@ -406,6 +406,7 @@
         return f;
     })();
 
+    exports.HaxanError = HaxanError;
     exports.HaxanFactory = HaxanFactory;
     exports.default = index;
 

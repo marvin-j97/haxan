@@ -1,6 +1,12 @@
 import { VERSION } from "./version";
-import { IHaxanOptions, IHaxanResponse } from "./interfaces";
-import { HTTPMethod, ResponseType, HaxanError, HaxanErrorType } from "./types";
+import {
+  HTTPMethod,
+  ResponseType,
+  HaxanError,
+  HaxanErrorType,
+  IHaxanOptions,
+  IHaxanResponse,
+} from "./types";
 import {
   isBrowser,
   stringifyQuery,

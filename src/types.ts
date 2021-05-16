@@ -26,4 +26,22 @@ export enum HTTPMethod {
   Options = "OPTIONS",
 }
 
+export interface IHaxanOptions {
+  url: string;
+  method: string;
+  headers: Record<string, string>;
+  query: Record<string, unknown>;
+  body: unknown;
+  type: ResponseType;
+  abortSignal?: AbortSignal;
+  timeout: number;
+}
+
+export interface IHaxanResponse<T> {
+  data: T;
+  ok: boolean;
+  status: number;
+  headers: Record<string, string>;
+}
+
 export * from "./error";

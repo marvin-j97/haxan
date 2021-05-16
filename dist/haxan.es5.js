@@ -8,14 +8,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   'use strict';
 
   var VERSION = "0.3.0";
-  var HaxanErrorType;
+  exports.HaxanErrorType = void 0;
 
   (function (HaxanErrorType) {
     HaxanErrorType["NetworkError"] = "NetworkError";
     HaxanErrorType["ParseError"] = "ParseError";
     HaxanErrorType["Timeout"] = "Timeout";
     HaxanErrorType["Abort"] = "Abort";
-  })(HaxanErrorType || (HaxanErrorType = {}));
+  })(exports.HaxanErrorType || (exports.HaxanErrorType = {}));
   /**
    * Thrown on internal errors
    */
@@ -67,20 +67,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    */
 
 
-  var ResponseType;
+  exports.ResponseType = void 0;
 
   (function (ResponseType) {
     ResponseType["Auto"] = "auto";
     ResponseType["Json"] = "json";
     ResponseType["Text"] = "text";
     ResponseType["Stream"] = "stream";
-  })(ResponseType || (ResponseType = {}));
+  })(exports.ResponseType || (exports.ResponseType = {}));
   /**
    * HTTP methods
    */
 
 
-  var HTTPMethod;
+  exports.HTTPMethod = void 0;
 
   (function (HTTPMethod) {
     HTTPMethod["Get"] = "GET";
@@ -90,21 +90,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     HTTPMethod["Delete"] = "DELETE";
     HTTPMethod["Head"] = "HEAD";
     HTTPMethod["Options"] = "OPTIONS";
-  })(HTTPMethod || (HTTPMethod = {}));
+  })(exports.HTTPMethod || (exports.HTTPMethod = {}));
 
   var types = /*#__PURE__*/Object.freeze({
     __proto__: null,
 
     get ResponseType() {
-      return ResponseType;
+      return exports.ResponseType;
     },
 
     get HTTPMethod() {
-      return HTTPMethod;
+      return exports.HTTPMethod;
     },
 
     get HaxanErrorType() {
-      return HaxanErrorType;
+      return exports.HaxanErrorType;
     },
 
     HaxanError: HaxanError
@@ -129,7 +129,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }
 
   function canHaveBody(method) {
-    return [HTTPMethod.Put, HTTPMethod.Post, HTTPMethod.Patch].includes(method.toUpperCase());
+    return [exports.HTTPMethod.Put, exports.HTTPMethod.Post, exports.HTTPMethod.Patch].includes(method.toUpperCase());
   }
 
   var __assign = undefined && undefined.__assign || function () {
@@ -294,7 +294,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   function timeout(timeMs) {
     return new Promise(function (_resolve, reject) {
       return setTimeout(function () {
-        return reject(new HaxanError(HaxanErrorType.Timeout, "Request timed out (Reached " + timeMs + "ms)", null));
+        return reject(new HaxanError(exports.HaxanErrorType.Timeout, "Request timed out (Reached " + timeMs + "ms)", null));
       }, timeMs);
     });
   }
@@ -312,9 +312,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         url: "",
         headers: {},
         query: {},
-        method: HTTPMethod.Get,
+        method: exports.HTTPMethod.Get,
         body: undefined,
-        type: ResponseType.Auto,
+        type: exports.ResponseType.Auto,
         abortSignal: undefined,
         timeout: 30000
       };
@@ -464,7 +464,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               _d.trys.push([0, 8,, 9]);
 
               resHeaders = normalizeHeaders(res.headers);
-              if (!(this._opts.type === ResponseType.Auto)) return [3
+              if (!(this._opts.type === exports.ResponseType.Auto)) return [3
               /*break*/
               , 2];
               _a = {};
@@ -478,7 +478,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               , (_a.data = _d.sent(), _a.ok = res.ok, _a.status = res.status, _a.headers = resHeaders, _a)];
 
             case 2:
-              if (!(this._opts.type === ResponseType.Json)) return [3
+              if (!(this._opts.type === exports.ResponseType.Json)) return [3
               /*break*/
               , 4];
               _b = {};
@@ -492,7 +492,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               , (_b.data = _d.sent(), _b.ok = res.ok, _b.status = res.status, _b.headers = resHeaders, _b)];
 
             case 4:
-              if (!(this._opts.type === ResponseType.Text)) return [3
+              if (!(this._opts.type === exports.ResponseType.Text)) return [3
               /*break*/
               , 6];
               _c = {};
@@ -506,7 +506,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               , (_c.data = _d.sent(), _c.ok = res.ok, _c.status = res.status, _c.headers = resHeaders, _c)];
 
             case 6:
-              if (this._opts.type === ResponseType.Stream && !isBrowser()) {
+              if (this._opts.type === exports.ResponseType.Stream && !isBrowser()) {
                 return [2
                 /*return*/
                 , {
@@ -520,7 +520,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               _d.label = 7;
 
             case 7:
-              throw new HaxanError(HaxanErrorType.ParseError, "No valid response body parsing method found", null, {
+              throw new HaxanError(exports.HaxanErrorType.ParseError, "No valid response body parsing method found", null, {
                 data: res.body,
                 ok: res.ok,
                 status: res.status,
@@ -585,10 +585,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               error = _error_1;
 
               if (error.name === "AbortError") {
-                throw new HaxanError(HaxanErrorType.Abort, "Request aborted", error);
+                throw new HaxanError(exports.HaxanErrorType.Abort, "Request aborted", error);
               }
 
-              throw new HaxanError(HaxanErrorType.NetworkError, "Network error", error);
+              throw new HaxanError(exports.HaxanErrorType.NetworkError, "Network error", error);
 
             case 4:
               return [2
@@ -647,6 +647,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return f;
   }();
 
+  exports.HaxanError = HaxanError;
   exports.HaxanFactory = HaxanFactory;
   exports["default"] = index;
   Object.defineProperty(exports, '__esModule', {

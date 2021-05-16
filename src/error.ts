@@ -1,4 +1,4 @@
-import { IHaxanResponse } from "./index";
+import { IHaxanResponse } from "./types";
 
 export enum HaxanErrorType {
   NetworkError = "NetworkError",

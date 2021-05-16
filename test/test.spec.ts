@@ -2,7 +2,7 @@ import test, { before } from "ava";
 import express from "express";
 import AbortController from "abort-controller";
 
-import haxan from "../src/index";
+import haxan, { HaxanErrorType } from "../src/index";
 import {
   ReadStream,
   createWriteStream,
@@ -10,7 +10,7 @@ import {
   readFileSync,
   unlinkSync,
 } from "fs";
-import { HaxanErrorType, HTTPMethod, ResponseType } from "../src/types";
+import { HTTPMethod, ResponseType } from "../src/types";
 
 function reflectBody(req: express.Request, res: express.Response) {
   console.log("Received request body", req.body);
