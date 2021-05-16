@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ResponseType | haxan</title>
+	<title>HaxanErrorType | haxan</title>
 	<meta name="description" content="Documentation for haxan">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,29 +55,19 @@
 					<a href="../modules.html">haxan</a>
 				</li>
 				<li>
-					<a href="../modules/types.html">types</a>
+					<a href="../modules/error.html">error</a>
 				</li>
 				<li>
-					<a href="types.responsetype.html">ResponseType</a>
+					<a href="error.haxanerrortype.html">HaxanErrorType</a>
 				</li>
 			</ul>
-			<h1>Enumeration ResponseType</h1>
+			<h1>Enumeration HaxanErrorType</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Response modes, defaults to auto.</p>
-					</div>
-					<p>Auto parses to JSON when the Content-Type header is set to <code>application/json</code>
-					Otherwise the response body is returned as string</p>
-					<p>Stream is only usable in Node.js</p>
-				</div>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -85,10 +75,10 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.responsetype.html#auto" class="tsd-kind-icon">Auto</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.responsetype.html#json" class="tsd-kind-icon">Json</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.responsetype.html#stream" class="tsd-kind-icon">Stream</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="types.responsetype.html#text" class="tsd-kind-icon">Text</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="error.haxanerrortype.html#abort" class="tsd-kind-icon">Abort</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="error.haxanerrortype.html#networkerror" class="tsd-kind-icon">Network<wbr>Error</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="error.haxanerrortype.html#parseerror" class="tsd-kind-icon">Parse<wbr>Error</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="error.haxanerrortype.html#timeout" class="tsd-kind-icon">Timeout</a></li>
 							</ul>
 						</section>
 					</div>
@@ -97,42 +87,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="auto" class="tsd-anchor"></a>
-					<h3>Auto</h3>
-					<div class="tsd-signature tsd-kind-icon">Auto<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;auto&quot;</span></div>
+					<a name="abort" class="tsd-anchor"></a>
+					<h3>Abort</h3>
+					<div class="tsd-signature tsd-kind-icon">Abort<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;Abort&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/types.ts#L10">types.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/error.ts#L7">error.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="json" class="tsd-anchor"></a>
-					<h3>Json</h3>
-					<div class="tsd-signature tsd-kind-icon">Json<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;json&quot;</span></div>
+					<a name="networkerror" class="tsd-anchor"></a>
+					<h3>Network<wbr>Error</h3>
+					<div class="tsd-signature tsd-kind-icon">Network<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;NetworkError&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/types.ts#L11">types.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/error.ts#L4">error.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="stream" class="tsd-anchor"></a>
-					<h3>Stream</h3>
-					<div class="tsd-signature tsd-kind-icon">Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;stream&quot;</span></div>
+					<a name="parseerror" class="tsd-anchor"></a>
+					<h3>Parse<wbr>Error</h3>
+					<div class="tsd-signature tsd-kind-icon">Parse<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;ParseError&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/types.ts#L13">types.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/error.ts#L5">error.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="text" class="tsd-anchor"></a>
-					<h3>Text</h3>
-					<div class="tsd-signature tsd-kind-icon">Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;text&quot;</span></div>
+					<a name="timeout" class="tsd-anchor"></a>
+					<h3>Timeout</h3>
+					<div class="tsd-signature tsd-kind-icon">Timeout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = &quot;Timeout&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/types.ts#L12">types.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/error.ts#L6">error.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +137,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/client.html">client</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/error.html">error</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -156,7 +146,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/interfaces.html">interfaces</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/types.html">types</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -169,36 +159,30 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/types.html#haxanerror" class="tsd-kind-icon">Haxan<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/types.html#haxanerrortype" class="tsd-kind-icon">Haxan<wbr>Error<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-module">
-						<a href="types.httpmethod.html" class="tsd-kind-icon">HTTPMethod</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-enum tsd-parent-kind-module">
-						<a href="types.responsetype.html" class="tsd-kind-icon">Response<wbr>Type</a>
+						<a href="error.haxanerrortype.html" class="tsd-kind-icon">Haxan<wbr>Error<wbr>Type</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.responsetype.html#auto" class="tsd-kind-icon">Auto</a>
+								<a href="error.haxanerrortype.html#abort" class="tsd-kind-icon">Abort</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.responsetype.html#json" class="tsd-kind-icon">Json</a>
+								<a href="error.haxanerrortype.html#networkerror" class="tsd-kind-icon">Network<wbr>Error</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.responsetype.html#stream" class="tsd-kind-icon">Stream</a>
+								<a href="error.haxanerrortype.html#parseerror" class="tsd-kind-icon">Parse<wbr>Error</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="types.responsetype.html#text" class="tsd-kind-icon">Text</a>
+								<a href="error.haxanerrortype.html#timeout" class="tsd-kind-icon">Timeout</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../classes/error.haxanerror.html" class="tsd-kind-icon">Haxan<wbr>Error</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

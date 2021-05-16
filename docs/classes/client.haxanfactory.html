@@ -113,7 +113,9 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#abort" class="tsd-kind-icon">abort</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#body" class="tsd-kind-icon">body</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="client.haxanfactory.html#buildurl" class="tsd-kind-icon">build<wbr>Url</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#delete" class="tsd-kind-icon">delete</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private"><a href="client.haxanfactory.html#dorequest" class="tsd-kind-icon">do<wbr>Request</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#execute" class="tsd-kind-icon">execute</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#getoptions" class="tsd-kind-icon">get<wbr>Options</a></li>
@@ -124,10 +126,10 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#param" class="tsd-kind-icon">param</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="client.haxanfactory.html#parsebody" class="tsd-kind-icon">parse<wbr>Body</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="client.haxanfactory.html#parseresponse" class="tsd-kind-icon">parse<wbr>Response</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#patch" class="tsd-kind-icon">patch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#post" class="tsd-kind-icon">post</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#put" class="tsd-kind-icon">put</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#rejecton" class="tsd-kind-icon">reject<wbr>On</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#request" class="tsd-kind-icon">request</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="client.haxanfactory.html#send" class="tsd-kind-icon">send</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private"><a href="client.haxanfactory.html#setprop" class="tsd-kind-icon">set<wbr>Prop</a></li>
@@ -151,7 +153,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L32">src/client.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L46">client.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -182,7 +184,7 @@
 					<div class="tsd-signature tsd-kind-icon">_opts<span class="tsd-signature-symbol">:</span> <a href="../interfaces/interfaces.ihaxanoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanOptions</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L22">src/client.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L37">client.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L111">src/client.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L121">client.ts:121</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -222,7 +224,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L93">src/client.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L103">client.ts:103</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -232,6 +234,23 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="buildurl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> build<wbr>Url</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">build<wbr>Url<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L206">client.ts:206</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -245,10 +264,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L89">src/client.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L99">client.ts:99</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+					<a name="dorequest" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> do<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">do<wbr>Request&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L212">client.ts:212</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -262,7 +304,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L142">src/client.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L152">client.ts:152</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -279,7 +321,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L65">src/client.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L75">client.ts:75</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -296,7 +338,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L134">src/client.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L144">client.ts:144</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/interfaces.ihaxanoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanOptions</a></h4>
@@ -313,7 +355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L69">src/client.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L79">client.ts:79</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -330,7 +372,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L97">src/client.ts:97</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L107">client.ts:107</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -356,7 +398,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L61">src/client.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L71">client.ts:71</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -379,7 +421,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L115">src/client.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L125">client.ts:125</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
@@ -396,7 +438,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L73">src/client.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L83">client.ts:83</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -413,7 +455,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L102">src/client.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L112">client.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -439,7 +481,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L126">src/client.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L136">client.ts:136</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -449,6 +491,29 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="parseresponse" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> parse<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Response<span class="tsd-signature-symbol">(</span>res<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L156">client.ts:156</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>res: <span class="tsd-signature-type">Response</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -462,7 +527,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L85">src/client.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L95">client.ts:95</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -485,7 +550,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L77">src/client.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L87">client.ts:87</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -508,36 +573,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L81">src/client.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L91">client.ts:91</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>body: <span class="tsd-signature-type">unknown</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="rejecton" class="tsd-anchor"></a>
-					<h3>reject<wbr>On</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">reject<wbr>On<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><a href="../modules/interfaces.html#rejectionfunction" class="tsd-signature-type" data-tsd-kind="Type alias">RejectionFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L49">src/client.ts:49</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>func: <a href="../modules/interfaces.html#rejectionfunction" class="tsd-signature-type" data-tsd-kind="Type alias">RejectionFunction</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="client.haxanfactory.html" class="tsd-signature-type" data-tsd-kind="Class">HaxanFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -554,7 +596,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L146">src/client.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L242">client.ts:242</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -571,7 +613,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L138">src/client.ts:138</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L148">client.ts:148</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/interfaces.ihaxanresponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IHaxanResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -588,7 +630,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L41">src/client.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L55">client.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -620,7 +662,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L107">src/client.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L117">client.ts:117</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -643,7 +685,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L57">src/client.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L67">client.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -666,7 +708,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/dbb2a7c/src/client.ts#L53">src/client.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/marvin-j97/haxan/blob/f0f48d6/src/client.ts#L63">client.ts:63</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -689,6 +731,9 @@
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/client.html">client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/error.html">error</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/index.html">index</a>
@@ -726,8 +771,14 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.haxanfactory.html#body" class="tsd-kind-icon">body</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="client.haxanfactory.html#buildurl" class="tsd-kind-icon">build<wbr>Url</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.haxanfactory.html#delete" class="tsd-kind-icon">delete</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private">
+								<a href="client.haxanfactory.html#dorequest" class="tsd-kind-icon">do<wbr>Request</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.haxanfactory.html#execute" class="tsd-kind-icon">execute</a>
@@ -759,6 +810,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="client.haxanfactory.html#parsebody" class="tsd-kind-icon">parse<wbr>Body</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="client.haxanfactory.html#parseresponse" class="tsd-kind-icon">parse<wbr>Response</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.haxanfactory.html#patch" class="tsd-kind-icon">patch</a>
 							</li>
@@ -767,9 +821,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.haxanfactory.html#put" class="tsd-kind-icon">put</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="client.haxanfactory.html#rejecton" class="tsd-kind-icon">reject<wbr>On</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="client.haxanfactory.html#request" class="tsd-kind-icon">request</a>
@@ -809,16 +860,14 @@
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
