@@ -10,11 +10,11 @@ import {
   readFileSync,
   unlinkSync,
 } from "fs";
-import { HTTPMethod, ResponseType } from "../src/types";
+import { HaxanErrorType, HTTPMethod, ResponseType } from "../src/types";
 
 function reflectBody(req: express.Request, res: express.Response) {
   console.log("Received request body", req.body);
-  res.json(req.body); 
+  res.json(req.body);
 }
 
 before(() => {
@@ -32,7 +32,9 @@ before(() => {
     .post("/", reflectBody)
     .patch("/", reflectBody)
     .put("/", reflectBody)
-    .listen(8080);
+    .listen(8080, () => {
+      console.error("Started Haxan test server");
+    });
 });
 
 test.serial("200", async (t) => {
@@ -57,15 +59,15 @@ test.serial("404", async (t) => {
   t.is(res.ok, false);
 });
 
-test.serial("Error", async (t) => {
+test.serial("Network error", async (t) => {
   t.plan(2);
 
   try {
     const url = "https://.typicode.com/todos/15125125";
     await haxan(url).param("query", "hello").param("page", 4).request();
   } catch (error) {
-    t.is(error.isHaxanError, undefined);
-    t.is(error.code, "ENOTFOUND");
+    t.is(error.getType(), HaxanErrorType.NetworkError);
+    t.is(error.getOriginalError()?.name, "FetchError");
   }
 });
 
@@ -123,7 +125,7 @@ test.serial("Timeout", async (t) => {
   try {
     await haxan(url).timeout(2000).request();
   } catch (error) {
-    t.is(error.isHaxanError && error.isTimeout, true);
+    t.is(error.getType(), HaxanErrorType.Timeout);
   }
 });
 
@@ -140,7 +142,7 @@ test.serial("Abort", (t) => {
       await haxan(url).abort(abortController.signal).request();
       reject();
     } catch (error) {
-      t.is(error.isHaxanError && error.isAbort, true);
+      t.is(error.getType(), HaxanErrorType.Abort);
       resolve();
     }
   });
@@ -224,16 +226,6 @@ test.serial("Use options API", async (t) => {
     t.assert(res.ok);
     t.is(res.data, HTTPMethod.Post);
   } catch (error) {}
-});
-
-test.serial("Use rejectOn", async (t) => {
-  const url = "http://localhost:8080/method";
-  await t.throwsAsync(() =>
-    haxan(url)
-      .rejectOn((status) => status === 200)
-      .request(),
-  );
-  await t.notThrowsAsync(haxan(url).request());
 });
 
 test.serial("Send header", async (t) => {

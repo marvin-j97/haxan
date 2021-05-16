@@ -1,7 +1,5 @@
 import { ResponseType } from "./types";
 
-export type RejectionFunction = (status: number) => boolean;
-
 export interface IHaxanOptions {
   url: string;
   method: string;
@@ -9,7 +7,6 @@ export interface IHaxanOptions {
   query: Record<string, unknown>;
   body: unknown;
   type: ResponseType;
-  rejectOn: RejectionFunction;
   abortSignal?: AbortSignal;
   timeout: number;
 }

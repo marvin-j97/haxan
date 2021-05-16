@@ -1,18 +1,33 @@
 import { VERSION } from "./version";
-import { IHaxanOptions, IHaxanResponse, RejectionFunction } from "./interfaces";
-import {
-  HTTPMethod,
-  ResponseType,
-  HaxanRejection,
-  HaxanAbort,
-  HaxanTimeout,
-} from "./types";
+import { IHaxanOptions, IHaxanResponse } from "./interfaces";
+import { HTTPMethod, ResponseType, HaxanError, HaxanErrorType } from "./types";
 import {
   isBrowser,
   stringifyQuery,
   normalizeHeaders,
   canHaveBody,
 } from "./util";
+
+type FetchFunction = (
+  input: RequestInfo,
+  init?: RequestInit,
+) => Promise<Response>;
+
+function timeout(timeMs: number): Promise<void> {
+  return new Promise((_resolve, reject) =>
+    setTimeout(
+      () =>
+        reject(
+          new HaxanError(
+            HaxanErrorType.Timeout,
+            `Request timed out (Reached ${timeMs}ms)`,
+            null,
+          ),
+        ),
+      timeMs,
+    ),
+  );
+}
 
 /**
  * Request factory, supports both options (given in constructor)
@@ -26,7 +41,6 @@ export class HaxanFactory<T = unknown> {
     method: HTTPMethod.Get,
     body: undefined,
     type: ResponseType.Auto,
-    rejectOn: () => false,
     abortSignal: undefined,
     timeout: 30000,
   };
@@ -44,10 +58,6 @@ export class HaxanFactory<T = unknown> {
   ) {
     this._opts[key] = value;
     return this;
-  }
-
-  rejectOn(func: RejectionFunction): this {
-    return this.setProp("rejectOn", func);
   }
 
   url(url: string): this {
@@ -118,7 +128,7 @@ export class HaxanFactory<T = unknown> {
       return null;
     }
     if (typeof body === "string") {
-      return body; 
+      return body;
     }
     return JSON.stringify(body);
   }
@@ -143,47 +153,8 @@ export class HaxanFactory<T = unknown> {
     return this.request();
   }
 
-  async request(): Promise<IHaxanResponse<T>> {
+  private async parseResponse(res: Response): Promise<IHaxanResponse<T>> {
     try {
-      let fetchImplementation: (
-        input: RequestInfo,
-        init?: RequestInit,
-      ) => Promise<Response>;
-
-      const _isBrowser = isBrowser();
-
-      if (_isBrowser) {
-        fetchImplementation = fetch;
-      } else {
-        fetchImplementation = require("node-fetch");
-      }
-
-      const url = Object.keys(this._opts.query).length
-        ? `${this._opts.url}?${stringifyQuery(this._opts.query)}`
-        : this._opts.url;
-
-      const res = <Response>await Promise.race([
-        fetchImplementation(url, {
-          method: this._opts.method,
-          headers: {
-            "Content-Type": "application/json",
-            ...this._opts.headers,
-            "User-Agent": `Haxan ${VERSION}`,
-          },
-          body: canHaveBody(this._opts.method)
-            ? this.normalizedBody()
-            : undefined,
-          signal: this._opts.abortSignal,
-        }),
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new HaxanTimeout()), this._opts.timeout),
-        ),
-      ]);
-
-      if (this._opts.rejectOn(res.status)) {
-        throw new HaxanRejection(res);
-      }
-
       const resHeaders = normalizeHeaders(res.headers);
 
       if (this._opts.type === ResponseType.Auto) {
@@ -207,7 +178,7 @@ export class HaxanFactory<T = unknown> {
           status: res.status,
           headers: resHeaders,
         };
-      } else if (this._opts.type === ResponseType.Stream && !_isBrowser) {
+      } else if (this._opts.type === ResponseType.Stream && !isBrowser()) {
         return {
           data: <T>(<unknown>res.body),
           ok: res.ok,
@@ -216,13 +187,67 @@ export class HaxanFactory<T = unknown> {
         };
       }
 
-      throw new Error("No valid response body parsing method found");
+      throw new HaxanError(
+        HaxanErrorType.ParseError,
+        "No valid response body parsing method found",
+        null,
+        {
+          data: res.body,
+          ok: res.ok,
+          status: res.status,
+          headers: resHeaders,
+        },
+      );
     } catch (error) {
-      if (error.name === "AbortError") {
-        throw new HaxanAbort();
-      }
-      throw error;
+      throw new Error("Error during parsing response body");
     }
+  }
+
+  private buildUrl(): string {
+    return Object.keys(this._opts.query).length
+      ? `${this._opts.url}?${stringifyQuery(this._opts.query)}`
+      : this._opts.url;
+  }
+
+  private async doRequest<T>(): Promise<IHaxanResponse<T>> {
+    try {
+      const fetchImplementation: FetchFunction = isBrowser()
+        ? fetch
+        : require("node-fetch");
+
+      const res = await fetchImplementation(this.buildUrl(), {
+        method: this._opts.method,
+        headers: {
+          "Content-Type": "application/json",
+          ...this._opts.headers,
+          "User-Agent": `Haxan ${VERSION}`,
+        },
+        body: canHaveBody(this._opts.method)
+          ? this.normalizedBody()
+          : undefined,
+        signal: this._opts.abortSignal,
+      });
+      const parsed = await this.parseResponse(res);
+      return <IHaxanResponse<T>>(<unknown>parsed);
+    } catch (_error) {
+      const error: Error = _error;
+
+      if (error.name === "AbortError") {
+        throw new HaxanError(HaxanErrorType.Abort, "Request aborted", error);
+      }
+      throw new HaxanError(HaxanErrorType.NetworkError, "Network error", error);
+    }
+  }
+
+  async request(): Promise<IHaxanResponse<T>> {
+    const res = <IHaxanResponse<T>>await Promise.race([
+      // Real request promise
+      this.doRequest(),
+      // Timeout promise
+      timeout(this._opts.timeout),
+    ]);
+
+    return res;
   }
 }
 

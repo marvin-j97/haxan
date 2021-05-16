@@ -1,36 +1,24 @@
+declare enum HaxanErrorType {
+    NetworkError = "NetworkError",
+    ParseError = "ParseError",
+    Timeout = "Timeout",
+    Abort = "Abort"
+}
 /**
  * Thrown on internal errors
  */
-declare class HaxanError extends Error {
-    isHaxanError: boolean;
-    [k: string]: unknown;
+declare class HaxanError<T = unknown> {
+    private type;
+    private rawError;
+    private response;
+    private message;
+    constructor(type: HaxanErrorType, message: string, originalError: Error | null, response?: IHaxanResponse<T>);
+    getMessage(): string;
+    getType(): HaxanErrorType;
+    getOriginalError(): Error | null;
+    getResponse(): IHaxanResponse<T> | null;
 }
-declare function isHaxanError(val: any): val is HaxanError;
-/**
- * Thrown when the timeout limit is reached
- */
-declare class HaxanTimeout extends HaxanError {
-    isTimeout: boolean;
-    constructor();
-}
-declare function isHaxanTimeout(val: any): val is HaxanError;
-/**
- * Thrown when the custom rejectOn function evaluates to true
- */
-declare class HaxanRejection extends HaxanError {
-    isRejection: boolean;
-    response: Response;
-    constructor(res: Response);
-}
-declare function isHaxanRejection(val: any): val is HaxanError;
-/**
- * Thrown when the request is aborted
- */
-declare class HaxanAbort extends HaxanError {
-    isAbort: boolean;
-    constructor();
-}
-declare function isHaxanAbort(val: any): val is HaxanError;
+
 /**
  * Response modes, defaults to auto.
  *
@@ -58,38 +46,23 @@ declare enum HTTPMethod {
     Options = "OPTIONS"
 }
 
-type types_HaxanError = HaxanError;
-declare const types_HaxanError: typeof HaxanError;
-declare const types_isHaxanError: typeof isHaxanError;
-type types_HaxanTimeout = HaxanTimeout;
-declare const types_HaxanTimeout: typeof HaxanTimeout;
-declare const types_isHaxanTimeout: typeof isHaxanTimeout;
-type types_HaxanRejection = HaxanRejection;
-declare const types_HaxanRejection: typeof HaxanRejection;
-declare const types_isHaxanRejection: typeof isHaxanRejection;
-type types_HaxanAbort = HaxanAbort;
-declare const types_HaxanAbort: typeof HaxanAbort;
-declare const types_isHaxanAbort: typeof isHaxanAbort;
 type types_ResponseType = ResponseType;
 declare const types_ResponseType: typeof ResponseType;
 type types_HTTPMethod = HTTPMethod;
 declare const types_HTTPMethod: typeof HTTPMethod;
+type types_HaxanErrorType = HaxanErrorType;
+declare const types_HaxanErrorType: typeof HaxanErrorType;
+type types_HaxanError<_0> = HaxanError<_0>;
+declare const types_HaxanError: typeof HaxanError;
 declare namespace types {
   export {
-    types_HaxanError as HaxanError,
-    types_isHaxanError as isHaxanError,
-    types_HaxanTimeout as HaxanTimeout,
-    types_isHaxanTimeout as isHaxanTimeout,
-    types_HaxanRejection as HaxanRejection,
-    types_isHaxanRejection as isHaxanRejection,
-    types_HaxanAbort as HaxanAbort,
-    types_isHaxanAbort as isHaxanAbort,
     types_ResponseType as ResponseType,
     types_HTTPMethod as HTTPMethod,
+    types_HaxanErrorType as HaxanErrorType,
+    types_HaxanError as HaxanError,
   };
 }
 
-declare type RejectionFunction = (status: number) => boolean;
 interface IHaxanOptions {
     url: string;
     method: string;
@@ -97,7 +70,6 @@ interface IHaxanOptions {
     query: Record<string, unknown>;
     body: unknown;
     type: ResponseType;
-    rejectOn: RejectionFunction;
     abortSignal?: AbortSignal;
     timeout: number;
 }
@@ -116,7 +88,6 @@ declare class HaxanFactory<T = unknown> {
     private _opts;
     constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>);
     private setProp;
-    rejectOn(func: RejectionFunction): this;
     url(url: string): this;
     type(type: ResponseType): this;
     method(method: string): this;
@@ -137,6 +108,9 @@ declare class HaxanFactory<T = unknown> {
     getOptions(): IHaxanOptions;
     send(): Promise<IHaxanResponse<T>>;
     execute(): Promise<IHaxanResponse<T>>;
+    private parseResponse;
+    private buildUrl;
+    private doRequest;
     request(): Promise<IHaxanResponse<T>>;
 }
 /**
@@ -149,4 +123,4 @@ declare const _default: typeof createHaxanFactory & typeof types & {
 };
 
 export default _default;
-export { HaxanFactory, IHaxanOptions, IHaxanResponse, RejectionFunction };
+export { HaxanFactory, IHaxanOptions, IHaxanResponse };
