@@ -160,43 +160,31 @@ test.serial("Send patch body", async (t) => {
 
 test.serial("Send delete", async (t) => {
   const url = "http://localhost:8080/method";
-  t.plan(2);
-  try {
-    const res = await haxan(url).delete().request();
-    t.assert(res.ok);
-    t.is(res.data, HTTPMethod.Delete);
-  } catch (error) {}
+  const res = await haxan(url).delete().request();
+  t.assert(res.ok);
+  t.is(res.data, HTTPMethod.Delete);
 });
 
 test.serial("Send get", async (t) => {
   const url = "http://localhost:8080/method";
-  t.plan(2);
-  try {
-    const res = await haxan(url).get().request();
-    t.assert(res.ok);
-    t.is(res.data, HTTPMethod.Get);
-  } catch (error) {}
+  const res = await haxan(url).get().request();
+  t.assert(res.ok);
+  t.is(res.data, HTTPMethod.Get);
 });
 
 test.serial("Send head", async (t) => {
   const url = "http://localhost:8080/method";
-  t.plan(2);
-  try {
-    const res = await haxan(url).head().request();
-    t.assert(res.ok);
-    // Express returns empty response body, because it's a HEAD request
-    t.is(res.data, "");
-  } catch (error) {}
+  const res = await haxan(url).head().request();
+  t.assert(res.ok);
+  // Express returns empty response body, because it's a HEAD request
+  t.is(res.data, "");
 });
 
 test.serial("Send options", async (t) => {
   const url = "http://localhost:8080/method";
-  t.plan(2);
-  try {
-    const res = await haxan(url).options().request();
-    t.assert(res.ok);
-    t.is(res.data, HTTPMethod.Options);
-  } catch (error) {}
+  const res = await haxan(url).options().request();
+  t.assert(res.ok);
+  t.is(res.data, HTTPMethod.Options);
 });
 
 test.serial("Send put body", async (t) => {
@@ -220,12 +208,9 @@ test.serial("Send empty body", async (t) => {
 
 test.serial("Use options API", async (t) => {
   const url = "http://localhost:8080/method";
-  t.plan(2);
-  try {
-    const res = await haxan(url, { method: "POST" }).request();
-    t.assert(res.ok);
-    t.is(res.data, HTTPMethod.Post);
-  } catch (error) {}
+  const res = await haxan(url, { method: "POST" }).request();
+  t.assert(res.ok);
+  t.is(res.data, HTTPMethod.Post);
 });
 
 test.serial("Send header", async (t) => {
