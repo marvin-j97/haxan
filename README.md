@@ -121,14 +121,14 @@ Easily compose requests without complicated option merging (example code)
 ```typescript
 import Haxan, { HaxanFactory } from "haxan";
 
-function signRequest(url: string): HaxanFactory {
-  return Haxan(url)
+function signRequest(req: HaxanFactory<T>): HaxanFactory<T> {
+  return req
     .header("x-session", getUserSession())
     .header("x-csrf", getCsrfToken());
 }
 
-signRequest("/api/v1/endpoint")
-  // .header(...) - add more headers if needed
+signRequest(Haxan("/api/v1/endpoint"))
+  // .header(...) - add more headers to this specific request if needed
   .post(payload)
   .send()
   .then((response) => {
