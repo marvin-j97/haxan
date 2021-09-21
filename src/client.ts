@@ -1,3 +1,5 @@
+import fetch from "cross-fetch";
+
 import { VERSION } from "./version";
 import {
   HTTPMethod,
@@ -13,11 +15,6 @@ import {
   normalizeHeaders,
   canHaveBody,
 } from "./util";
-
-type FetchFunction = (
-  input: RequestInfo,
-  init?: RequestInit,
-) => Promise<Response>;
 
 function timeout(timeMs: number): Promise<void> {
   return new Promise((_resolve, reject) =>
@@ -217,11 +214,7 @@ export class HaxanFactory<T = unknown> {
 
   private async doRequest<T>(): Promise<IHaxanResponse<T>> {
     try {
-      const fetchImplementation: FetchFunction = isBrowser()
-        ? fetch
-        : require("node-fetch");
-
-      const res = await fetchImplementation(this.buildUrl(), {
+      const res = await fetch(this.buildUrl(), {
         method: this._opts.method,
         headers: {
           "Content-Type": "application/json",
@@ -235,7 +228,7 @@ export class HaxanFactory<T = unknown> {
       });
       const parsed = await this.parseResponse(res);
       return <IHaxanResponse<T>>(<unknown>parsed);
-    } catch (_error) {
+    } catch (_error: any) {
       const error: Error = _error;
 
       if (error.name === "AbortError") {
