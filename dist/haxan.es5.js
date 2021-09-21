@@ -649,7 +649,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
   exports.HaxanError = HaxanError;
   exports.HaxanFactory = HaxanFactory;
-  exports["default"] = index;
+  exports['default'] = index;
   Object.defineProperty(exports, '__esModule', {
     value: true
   });

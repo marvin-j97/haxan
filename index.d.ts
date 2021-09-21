@@ -125,5 +125,4 @@ declare const _default: typeof createHaxanFactory & typeof types & {
     HaxanFactory: typeof HaxanFactory;
 };
 
-export default _default;
-export { HTTPMethod, HaxanError, HaxanErrorType, HaxanFactory, IHaxanOptions, IHaxanResponse, ResponseType };
+export { HTTPMethod, HaxanError, HaxanErrorType, HaxanFactory, IHaxanOptions, IHaxanResponse, ResponseType, _default as default };

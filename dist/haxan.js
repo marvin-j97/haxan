@@ -408,7 +408,7 @@
 
     exports.HaxanError = HaxanError;
     exports.HaxanFactory = HaxanFactory;
-    exports.default = index;
+    exports['default'] = index;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
