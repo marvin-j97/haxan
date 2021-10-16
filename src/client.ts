@@ -201,8 +201,11 @@ export class HaxanFactory<T = unknown> {
           headers: resHeaders,
         },
       );
-    } catch (error) {
-      throw new Error("Error during parsing response body");
+    } catch (error: any) {
+      if (error.type === HaxanErrorType.ParseError) {
+        throw error;
+      }
+      throw new Error(`Error during parsing response body: ${error.message}`);
     }
   }
 
@@ -228,9 +231,10 @@ export class HaxanFactory<T = unknown> {
       });
       const parsed = await this.parseResponse(res);
       return <IHaxanResponse<T>>(<unknown>parsed);
-    } catch (_error: any) {
-      const error: Error = _error;
-
+    } catch (error: any) {
+      if (error.getType) {
+        throw error;
+      }
       if (error.name === "AbortError") {
         throw new HaxanError(HaxanErrorType.Abort, "Request aborted", error);
       }
