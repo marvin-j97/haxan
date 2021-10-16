@@ -1,5 +1,3 @@
-import fetch from "cross-fetch";
-
 import { VERSION } from "./version";
 import {
   HTTPMethod,
@@ -37,6 +35,7 @@ function timeout(timeMs: number): Promise<void> {
  * and a chainable API
  */
 export class HaxanFactory<T = unknown> {
+  private _fetch: any;
   private _opts: IHaxanOptions = {
     url: "",
     headers: {},
@@ -48,10 +47,15 @@ export class HaxanFactory<T = unknown> {
     timeout: 30000,
   };
 
-  constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>) {
+  constructor(
+    url: string,
+    _fetch?: any,
+    opts?: Partial<Omit<IHaxanOptions, "url">>,
+  ) {
     if (opts) {
       Object.assign(this._opts, opts);
     }
+    this._fetch = _fetch || fetch;
     this.url(url);
   }
 
@@ -217,7 +221,7 @@ export class HaxanFactory<T = unknown> {
 
   private async doRequest<T>(): Promise<IHaxanResponse<T>> {
     try {
-      const res = await fetch(this.buildUrl(), {
+      const res: Response = await this._fetch(this.buildUrl(), {
         method: this._opts.method,
         headers: {
           "Content-Type": "application/json",
@@ -259,7 +263,8 @@ export class HaxanFactory<T = unknown> {
  */
 export function createHaxanFactory<T>(
   url: string,
+  _fetch?: any,
   opts?: Partial<Omit<IHaxanOptions, "url">>,
 ): HaxanFactory<T> {
-  return new HaxanFactory(url, opts);
+  return new HaxanFactory(url, _fetch, opts);
 }
