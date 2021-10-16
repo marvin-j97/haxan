@@ -1689,7 +1689,7 @@
 	nodePonyfill.Request;
 	nodePonyfill.Response;
 
-	var VERSION = "0.4.0";
+	var VERSION = "0.4.1";
 
 	exports.HaxanErrorType = void 0;
 	(function (HaxanErrorType) {
@@ -1953,7 +1953,7 @@
 	    };
 	    HaxanFactory.prototype.parseResponse = function (res) {
 	        return __awaiter(this, void 0, void 0, function () {
-	            var resHeaders;
+	            var resHeaders, error_1;
 	            var _a, _b, _c;
 	            return __generator(this, function (_d) {
 	                switch (_d.label) {
@@ -2003,8 +2003,11 @@
 	                        headers: resHeaders,
 	                    });
 	                    case 8:
-	                        _d.sent();
-	                        throw new Error("Error during parsing response body");
+	                        error_1 = _d.sent();
+	                        if (error_1.type === exports.HaxanErrorType.ParseError) {
+	                            throw error_1;
+	                        }
+	                        throw new Error("Error during parsing response body: " + error_1.message);
 	                    case 9: return [2 /*return*/];
 	                }
 	            });
@@ -2017,7 +2020,7 @@
 	    };
 	    HaxanFactory.prototype.doRequest = function () {
 	        return __awaiter(this, void 0, void 0, function () {
-	            var res, parsed, _error_1, error;
+	            var res, parsed, error_2;
 	            return __generator(this, function (_a) {
 	                switch (_a.label) {
 	                    case 0:
@@ -2037,12 +2040,14 @@
 	                        parsed = _a.sent();
 	                        return [2 /*return*/, parsed];
 	                    case 3:
-	                        _error_1 = _a.sent();
-	                        error = _error_1;
-	                        if (error.name === "AbortError") {
-	                            throw new HaxanError(exports.HaxanErrorType.Abort, "Request aborted", error);
+	                        error_2 = _a.sent();
+	                        if (error_2.getType) {
+	                            throw error_2;
 	                        }
-	                        throw new HaxanError(exports.HaxanErrorType.NetworkError, "Network error", error);
+	                        if (error_2.name === "AbortError") {
+	                            throw new HaxanError(exports.HaxanErrorType.Abort, "Request aborted", error_2);
+	                        }
+	                        throw new HaxanError(exports.HaxanErrorType.NetworkError, "Network error", error_2);
 	                    case 4: return [2 /*return*/];
 	                }
 	            });
