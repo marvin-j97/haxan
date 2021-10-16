@@ -88,8 +88,9 @@ declare namespace types {
  * and a chainable API
  */
 declare class HaxanFactory<T = unknown> {
+    private _fetch;
     private _opts;
-    constructor(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>);
+    constructor(url: string, _fetch?: any, opts?: Partial<Omit<IHaxanOptions, "url">>);
     private setProp;
     url(url: string): this;
     type(type: ResponseType): this;
@@ -119,7 +120,7 @@ declare class HaxanFactory<T = unknown> {
 /**
  * Creates a new Haxan instance
  */
-declare function createHaxanFactory<T>(url: string, opts?: Partial<Omit<IHaxanOptions, "url">>): HaxanFactory<T>;
+declare function createHaxanFactory<T>(url: string, _fetch?: any, opts?: Partial<Omit<IHaxanOptions, "url">>): HaxanFactory<T>;
 
 declare const _default: typeof createHaxanFactory & typeof types & {
     HaxanFactory: typeof HaxanFactory;
