@@ -196,6 +196,20 @@ export class HaxanFactory<T = unknown> {
           status: res.status,
           headers: resHeaders,
         };
+      } else if (this._opts.type === ResponseType.Blob) {
+        return {
+          data: <T>(<unknown>await res.blob()),
+          ok: res.ok,
+          status: res.status,
+          headers: resHeaders,
+        };
+      } else if (this._opts.type === ResponseType.ArrayBuffer) {
+        return {
+          data: <T>(<unknown>await res.arrayBuffer()),
+          ok: res.ok,
+          status: res.status,
+          headers: resHeaders,
+        };
       } else if (this._opts.type === ResponseType.Stream && !isBrowser()) {
         return {
           data: <T>(<unknown>res.body),

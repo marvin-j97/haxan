@@ -11,6 +11,8 @@ export enum ResponseType {
   Json = "json",
   Text = "text",
   Stream = "stream",
+  Blob = "blob",
+  ArrayBuffer = "arraybuffer",
 }
 
 /**
