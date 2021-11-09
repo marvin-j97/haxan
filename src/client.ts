@@ -35,7 +35,7 @@ function timeout(timeMs: number): Promise<void> {
  * and a chainable API
  */
 export class HaxanFactory<T = unknown> {
-  private _fetch: any;
+  private _fetch: typeof fetch;
   private _opts: IHaxanOptions = {
     url: "",
     headers: {},
@@ -45,7 +45,9 @@ export class HaxanFactory<T = unknown> {
     type: ResponseType.Auto,
     abortSignal: undefined,
     timeout: 30000,
+    redirect: "follow",
   };
+  private _addOptions: Record<string, unknown> = {};
 
   constructor(
     url: string,
@@ -67,6 +69,15 @@ export class HaxanFactory<T = unknown> {
     return this;
   }
 
+  redirect(value: "follow" | "manual") {
+    return this.setProp("redirect", value);
+  }
+
+  addOptions<T extends Record<string, unknown>>(opts: T) {
+    this._addOptions = opts;
+    return this;
+  }
+
   url(url: string): this {
     return this.setProp("url", url);
   }
@@ -80,31 +91,31 @@ export class HaxanFactory<T = unknown> {
   }
 
   get(): this {
-    return this.method("GET");
+    return this.method(HTTPMethod.Get);
   }
 
   head(): this {
-    return this.method("HEAD");
+    return this.method(HTTPMethod.Head);
   }
 
   options(): this {
-    return this.method("OPTIONS");
+    return this.method(HTTPMethod.Options);
   }
 
   post(body: unknown): this {
-    return this.body(body).method("POST");
+    return this.body(body).method(HTTPMethod.Post);
   }
 
   put(body: unknown): this {
-    return this.body(body).method("PUT");
+    return this.body(body).method(HTTPMethod.Put);
   }
 
   patch(body: unknown): this {
-    return this.body(body).method("PATCH");
+    return this.body(body).method(HTTPMethod.Patch);
   }
 
   delete(): this {
-    return this.method("DELETE");
+    return this.method(HTTPMethod.Delete);
   }
 
   body(body: unknown): this {
@@ -232,6 +243,8 @@ export class HaxanFactory<T = unknown> {
           ? this.normalizedBody()
           : undefined,
         signal: this._opts.abortSignal,
+        redirect: this._opts.redirect,
+        ...this._addOptions,
       });
       const parsed = await this.parseResponse(res);
       return <IHaxanResponse<T>>(<unknown>parsed);

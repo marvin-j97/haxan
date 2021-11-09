@@ -35,6 +35,7 @@ export interface IHaxanOptions {
   type: ResponseType;
   abortSignal?: AbortSignal;
   timeout: number;
+  redirect: "follow" | "manual";
 }
 
 export interface IHaxanResponse<T> {
