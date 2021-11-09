@@ -31,7 +31,9 @@ declare enum ResponseType {
     Auto = "auto",
     Json = "json",
     Text = "text",
-    Stream = "stream"
+    Stream = "stream",
+    Blob = "blob",
+    ArrayBuffer = "arraybuffer"
 }
 /**
  * HTTP methods

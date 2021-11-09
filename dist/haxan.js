@@ -58,6 +58,8 @@
         ResponseType["Json"] = "json";
         ResponseType["Text"] = "text";
         ResponseType["Stream"] = "stream";
+        ResponseType["Blob"] = "blob";
+        ResponseType["ArrayBuffer"] = "arraybuffer";
     })(exports.ResponseType || (exports.ResponseType = {}));
     /**
      * HTTP methods
@@ -279,16 +281,16 @@
         HaxanFactory.prototype.parseResponse = function (res) {
             return __awaiter(this, void 0, void 0, function () {
                 var resHeaders, error_1;
-                var _a, _b, _c;
-                return __generator(this, function (_d) {
-                    switch (_d.label) {
+                var _a, _b, _c, _d, _e;
+                return __generator(this, function (_f) {
+                    switch (_f.label) {
                         case 0:
-                            _d.trys.push([0, 8, , 9]);
+                            _f.trys.push([0, 12, , 13]);
                             resHeaders = normalizeHeaders(res.headers);
                             if (!(this._opts.type === exports.ResponseType.Auto)) return [3 /*break*/, 2];
                             _a = {};
                             return [4 /*yield*/, this.parseBody(res)];
-                        case 1: return [2 /*return*/, (_a.data = _d.sent(),
+                        case 1: return [2 /*return*/, (_a.data = _f.sent(),
                                 _a.ok = res.ok,
                                 _a.status = res.status,
                                 _a.headers = resHeaders,
@@ -297,7 +299,7 @@
                             if (!(this._opts.type === exports.ResponseType.Json)) return [3 /*break*/, 4];
                             _b = {};
                             return [4 /*yield*/, res.json()];
-                        case 3: return [2 /*return*/, (_b.data = _d.sent(),
+                        case 3: return [2 /*return*/, (_b.data = _f.sent(),
                                 _b.ok = res.ok,
                                 _b.status = res.status,
                                 _b.headers = resHeaders,
@@ -306,12 +308,30 @@
                             if (!(this._opts.type === exports.ResponseType.Text)) return [3 /*break*/, 6];
                             _c = {};
                             return [4 /*yield*/, res.text()];
-                        case 5: return [2 /*return*/, (_c.data = (_d.sent()),
+                        case 5: return [2 /*return*/, (_c.data = (_f.sent()),
                                 _c.ok = res.ok,
                                 _c.status = res.status,
                                 _c.headers = resHeaders,
                                 _c)];
                         case 6:
+                            if (!(this._opts.type === exports.ResponseType.Blob)) return [3 /*break*/, 8];
+                            _d = {};
+                            return [4 /*yield*/, res.blob()];
+                        case 7: return [2 /*return*/, (_d.data = (_f.sent()),
+                                _d.ok = res.ok,
+                                _d.status = res.status,
+                                _d.headers = resHeaders,
+                                _d)];
+                        case 8:
+                            if (!(this._opts.type === exports.ResponseType.ArrayBuffer)) return [3 /*break*/, 10];
+                            _e = {};
+                            return [4 /*yield*/, res.arrayBuffer()];
+                        case 9: return [2 /*return*/, (_e.data = (_f.sent()),
+                                _e.ok = res.ok,
+                                _e.status = res.status,
+                                _e.headers = resHeaders,
+                                _e)];
+                        case 10:
                             if (this._opts.type === exports.ResponseType.Stream && !isBrowser()) {
                                 return [2 /*return*/, {
                                         data: res.body,
@@ -320,20 +340,20 @@
                                         headers: resHeaders,
                                     }];
                             }
-                            _d.label = 7;
-                        case 7: throw new HaxanError(exports.HaxanErrorType.ParseError, "No valid response body parsing method found", null, {
+                            _f.label = 11;
+                        case 11: throw new HaxanError(exports.HaxanErrorType.ParseError, "No valid response body parsing method found", null, {
                             data: res.body,
                             ok: res.ok,
                             status: res.status,
                             headers: resHeaders,
                         });
-                        case 8:
-                            error_1 = _d.sent();
+                        case 12:
+                            error_1 = _f.sent();
                             if (error_1.type === exports.HaxanErrorType.ParseError) {
                                 throw error_1;
                             }
                             throw new Error("Error during parsing response body: " + error_1.message);
-                        case 9: return [2 /*return*/];
+                        case 13: return [2 /*return*/];
                     }
                 });
             });
