@@ -4,7 +4,7 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
 }(this, (function (exports) { 'use strict';
 
-    var VERSION = "0.5.0";
+    var VERSION = "0.6.0";
 
     exports.HaxanErrorType = void 0;
     (function (HaxanErrorType) {
@@ -174,7 +174,9 @@
                 type: exports.ResponseType.Auto,
                 abortSignal: undefined,
                 timeout: 30000,
+                redirect: "follow",
             };
+            this._addOptions = {};
             if (opts) {
                 Object.assign(this._opts, opts);
             }
@@ -183,6 +185,13 @@
         }
         HaxanFactory.prototype.setProp = function (key, value) {
             this._opts[key] = value;
+            return this;
+        };
+        HaxanFactory.prototype.redirect = function (value) {
+            return this.setProp("redirect", value);
+        };
+        HaxanFactory.prototype.addOptions = function (opts) {
+            this._addOptions = opts;
             return this;
         };
         HaxanFactory.prototype.url = function (url) {
@@ -195,25 +204,25 @@
             return this.setProp("method", method);
         };
         HaxanFactory.prototype.get = function () {
-            return this.method("GET");
+            return this.method(exports.HTTPMethod.Get);
         };
         HaxanFactory.prototype.head = function () {
-            return this.method("HEAD");
+            return this.method(exports.HTTPMethod.Head);
         };
         HaxanFactory.prototype.options = function () {
-            return this.method("OPTIONS");
+            return this.method(exports.HTTPMethod.Options);
         };
         HaxanFactory.prototype.post = function (body) {
-            return this.body(body).method("POST");
+            return this.body(body).method(exports.HTTPMethod.Post);
         };
         HaxanFactory.prototype.put = function (body) {
-            return this.body(body).method("PUT");
+            return this.body(body).method(exports.HTTPMethod.Put);
         };
         HaxanFactory.prototype.patch = function (body) {
-            return this.body(body).method("PATCH");
+            return this.body(body).method(exports.HTTPMethod.Patch);
         };
         HaxanFactory.prototype.delete = function () {
-            return this.method("DELETE");
+            return this.method(exports.HTTPMethod.Delete);
         };
         HaxanFactory.prototype.body = function (body) {
             return this.setProp("body", body);
@@ -341,14 +350,9 @@
                     switch (_a.label) {
                         case 0:
                             _a.trys.push([0, 3, , 4]);
-                            return [4 /*yield*/, this._fetch(this.buildUrl(), {
-                                    method: this._opts.method,
-                                    headers: __assign(__assign({ "Content-Type": "application/json" }, this._opts.headers), { "User-Agent": "Haxan " + VERSION }),
-                                    body: canHaveBody(this._opts.method)
+                            return [4 /*yield*/, this._fetch(this.buildUrl(), __assign({ method: this._opts.method, headers: __assign(__assign({ "Content-Type": "application/json" }, this._opts.headers), { "User-Agent": "Haxan " + VERSION }), body: canHaveBody(this._opts.method)
                                         ? this.normalizedBody()
-                                        : undefined,
-                                    signal: this._opts.abortSignal,
-                                })];
+                                        : undefined, signal: this._opts.abortSignal, redirect: this._opts.redirect }, this._addOptions))];
                         case 1:
                             res = _a.sent();
                             return [4 /*yield*/, this.parseResponse(res)];

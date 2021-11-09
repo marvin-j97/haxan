@@ -7,7 +7,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(void 0, function (exports) {
   'use strict';
 
-  var VERSION = "0.5.0";
+  var VERSION = "0.6.0";
   exports.HaxanErrorType = void 0;
 
   (function (HaxanErrorType) {
@@ -316,8 +316,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         body: undefined,
         type: exports.ResponseType.Auto,
         abortSignal: undefined,
-        timeout: 30000
+        timeout: 30000,
+        redirect: "follow"
       };
+      this._addOptions = {};
 
       if (opts) {
         Object.assign(this._opts, opts);
@@ -329,6 +331,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     HaxanFactory.prototype.setProp = function (key, value) {
       this._opts[key] = value;
+      return this;
+    };
+
+    HaxanFactory.prototype.redirect = function (value) {
+      return this.setProp("redirect", value);
+    };
+
+    HaxanFactory.prototype.addOptions = function (opts) {
+      this._addOptions = opts;
       return this;
     };
 
@@ -345,31 +356,31 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     HaxanFactory.prototype.get = function () {
-      return this.method("GET");
+      return this.method(exports.HTTPMethod.Get);
     };
 
     HaxanFactory.prototype.head = function () {
-      return this.method("HEAD");
+      return this.method(exports.HTTPMethod.Head);
     };
 
     HaxanFactory.prototype.options = function () {
-      return this.method("OPTIONS");
+      return this.method(exports.HTTPMethod.Options);
     };
 
     HaxanFactory.prototype.post = function (body) {
-      return this.body(body).method("POST");
+      return this.body(body).method(exports.HTTPMethod.Post);
     };
 
     HaxanFactory.prototype.put = function (body) {
-      return this.body(body).method("PUT");
+      return this.body(body).method(exports.HTTPMethod.Put);
     };
 
     HaxanFactory.prototype.patch = function (body) {
-      return this.body(body).method("PATCH");
+      return this.body(body).method(exports.HTTPMethod.Patch);
     };
 
     HaxanFactory.prototype["delete"] = function () {
-      return this.method("DELETE");
+      return this.method(exports.HTTPMethod.Delete);
     };
 
     HaxanFactory.prototype.body = function (body) {
@@ -560,7 +571,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               return [4
               /*yield*/
-              , this._fetch(this.buildUrl(), {
+              , this._fetch(this.buildUrl(), __assign({
                 method: this._opts.method,
                 headers: __assign(__assign({
                   "Content-Type": "application/json"
@@ -568,8 +579,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   "User-Agent": "Haxan " + VERSION
                 }),
                 body: canHaveBody(this._opts.method) ? this.normalizedBody() : undefined,
-                signal: this._opts.abortSignal
-              })];
+                signal: this._opts.abortSignal,
+                redirect: this._opts.redirect
+              }, this._addOptions))];
 
             case 1:
               res = _a.sent();

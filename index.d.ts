@@ -54,6 +54,7 @@ interface IHaxanOptions {
     type: ResponseType;
     abortSignal?: AbortSignal;
     timeout: number;
+    redirect: "follow" | "manual";
 }
 interface IHaxanResponse<T> {
     data: T;
@@ -90,8 +91,11 @@ declare namespace types {
 declare class HaxanFactory<T = unknown> {
     private _fetch;
     private _opts;
+    private _addOptions;
     constructor(url: string, _fetch?: any, opts?: Partial<Omit<IHaxanOptions, "url">>);
     private setProp;
+    redirect(value: "follow" | "manual"): this;
+    addOptions<T extends Record<string, unknown>>(opts: T): this;
     url(url: string): this;
     type(type: ResponseType): this;
     method(method: string): this;
