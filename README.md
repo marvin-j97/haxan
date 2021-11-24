@@ -138,3 +138,28 @@ signRequest(Haxan("/api/v1/endpoint"))
     // Handle error
   });
 ```
+
+Retry failed requests (example)
+
+```typescript
+async function withRetries<T>(
+  request: HaxanFactory<T>,
+  retries = 3,
+): Promise<IHaxanResponse<T>> {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await request.send();
+      if (!res.ok) {
+        console.error(
+          `Request attempt ${i + 1} failed with status ${res.status}`,
+        );
+      } else {
+        return res;
+      }
+    } catch (error: any) {
+      console.error(`Request attempt ${i + 1} failed: ${error.message}`);
+    }
+  }
+  throw new Error("All retries failed");
+}
+```
