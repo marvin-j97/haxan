@@ -593,21 +593,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     HaxanFactory.prototype.doRequest = function () {
       return __awaiter(this, void 0, void 0, function () {
-        var res, parsed, error_2;
+        var headers, res, parsed, error_2;
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
               _a.trys.push([0, 3,, 4]);
 
+              headers = __assign({
+                "Content-Type": "application/json"
+              }, this._opts.headers);
+
+              if (typeof window === "undefined") {
+                headers["User-Agent"] = "Haxan " + VERSION;
+              }
+
               return [4
               /*yield*/
               , this._fetch(this.buildUrl(), __assign({
                 method: this._opts.method,
-                headers: __assign(__assign({
-                  "Content-Type": "application/json"
-                }, this._opts.headers), {
-                  "User-Agent": "Haxan " + VERSION
-                }),
+                headers: headers,
                 body: canHaveBody(this._opts.method) ? this.normalizedBody() : undefined,
                 signal: this._opts.abortSignal,
                 redirect: this._opts.redirect
