@@ -246,13 +246,18 @@ export class HaxanFactory<T = unknown> {
 
   private async doRequest<T>(): Promise<IHaxanResponse<T>> {
     try {
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        ...this._opts.headers,
+      };
+
+      if (typeof window === "undefined") {
+        headers["User-Agent"] = `Haxan ${VERSION}`;
+      }
+
       const res: Response = await this._fetch(this.buildUrl(), {
         method: this._opts.method,
-        headers: {
-          "Content-Type": "application/json",
-          ...this._opts.headers,
-          "User-Agent": `Haxan ${VERSION}`,
-        },
+        headers,
         body: canHaveBody(this._opts.method)
           ? this.normalizedBody()
           : undefined,
