@@ -30,7 +30,7 @@ export enum HTTPMethod {
 
 export interface IHaxanOptions {
   url: string;
-  method: string;
+  method: HTTPMethod | string;
   headers: Record<string, string>;
   query: Record<string, unknown>;
   body: unknown;

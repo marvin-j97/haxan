@@ -34,19 +34,19 @@ interface User {
   name: string;
 }
 
-Haxan<User>("http://localhost:3000/api/user/1234")
-  .request()
-  .then((response) => {
-    if (response.ok) {
-      // Success!
-      console.log(response.data); // Response data -> User
-    } else {
-      // Some error, but at least we got a response
-    }
-  })
-  .catch((error) => {
-    // Connection refused, no response
-  });
+const result = Haxan<User>("http://localhost:3000/api/user/1234").request();
+
+if (result.ok) {
+  const response = result.val;
+  if (response.ok) {
+    // Success!
+    console.log(response.data); // Response data -> User
+  } else {
+    // Some error, but at least we got a response
+  }
+} else {
+  // Connection refused, no response
+}
 ```
 
 Setting query parameters
@@ -54,15 +54,22 @@ Setting query parameters
 ```typescript
 import Haxan from "haxan";
 
-Haxan<string>("http://google.com/search")
-  .param("q", "Elephants") // -> http://google.com/search?q=Elephants
-  .request()
-  .then((response) => {
-    // Handle response
-  })
-  .catch((error) => {
-    // Handle error
-  });
+const result = await Haxan<string>("http://google.com/search").param(
+  "q",
+  "Elephants",
+); // -> http://google.com/search?q=Elephants
+
+if (result.ok) {
+  const response = result.val;
+  if (response.ok) {
+    // Success!
+    console.log(response.data); // Response data -> string
+  } else {
+    // Some error, but at least we got a response
+  }
+} else {
+  // Connection refused, no response
+}
 ```
 
 Sending a JSON payload with `POST`
@@ -75,15 +82,21 @@ const payload = {
   user_name: "@testname",
 };
 
-Haxan("http://localhost:3000/api/user")
+const result = await Haxan("http://localhost:3000/api/user")
   .post(payload)
-  .request()
-  .then((response) => {
-    // Handle response
-  })
-  .catch((error) => {
-    // Handle error
-  });
+  .request();
+
+if (result.ok) {
+  const response = result.val;
+  if (response.ok) {
+    // Success!
+    console.log(response.data); // Response data -> User
+  } else {
+    // Some error, but at least we got a response
+  }
+} else {
+  // Connection refused, no response
+}
 ```
 
 Download a file in Node.js
@@ -92,15 +105,21 @@ Download a file in Node.js
 import Haxan from "haxan";
 import crossFetch from "cross-fetch";
 
-Haxan<fs.ReadStream>("https://bit.ly/3k19d8D", crossFetch)
+const result = await Haxan<fs.ReadStream>("https://bit.ly/3k19d8D", crossFetch)
   .type(Haxan.ResponseType.Stream)
-  .send()
-  .then((response) => {
-    response.data.pipe(fs.createWriteStream("punisher.jpeg"));
-  })
-  .catch((error) => {
-    // Handle error
-  });
+  .send();
+
+if (result.ok) {
+  const response = result.val;
+  if (response.ok) {
+    // Success!
+    console.log(response.data); // Response data -> User
+  } else {
+    // Some error, but at least we got a response
+  }
+} else {
+  // Connection refused, no response
+}
 ```
 
 Sending other kinds of content
@@ -109,7 +128,7 @@ Sending other kinds of content
 import Haxan from "haxan";
 
 // Use a different Content-Type instead
-Haxan("http://localhost:3000/api/note")
+const result = await Haxan("http://localhost:3000/api/note")
   .header("Content-Type", "text/yaml")
   .post(
     `
@@ -117,13 +136,19 @@ Haxan("http://localhost:3000/api/note")
   message: I hope this is valid YAML
   `,
   )
-  .send()
-  .then((response) => {
-    // Handle response
-  })
-  .catch((error) => {
-    // Handle error
-  });
+  .send();
+
+if (result.ok) {
+  const response = result.val;
+  if (response.ok) {
+    // Success!
+    console.log(response.data); // Response data -> User
+  } else {
+    // Some error, but at least we got a response
+  }
+} else {
+  // Connection refused, no response
+}
 ```
 
 Easily compose requests without complicated option merging (example code)
@@ -137,41 +162,20 @@ function signRequest(req: HaxanFactory<T>): HaxanFactory<T> {
     .header("x-csrf", getCsrfToken());
 }
 
-signRequest(Haxan("/api/v1/endpoint"))
+const result = await signRequest(Haxan("/api/v1/endpoint"))
   // .header(...) - add more headers to this specific request if needed
   .post(payload)
-  .send()
-  .then((response) => {
-    // Handle response
-  })
-  .catch((error) => {
-    // Handle error
-  });
-```
+  .send();
 
-Retry failed requests (example)
-
-```typescript
-import Haxan from "haxan";
-
-async function withRetries<T>(
-  request: HaxanFactory<T>,
-  retries = 3,
-): Promise<IHaxanResponse<T>> {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const res = await request.send();
-      if (!res.ok) {
-        console.error(
-          `Request attempt ${i + 1} failed with status ${res.status}`,
-        );
-      } else {
-        return res;
-      }
-    } catch (error: any) {
-      console.error(`Request attempt ${i + 1} failed: ${error.message}`);
-    }
+if (result.ok) {
+  const response = result.val;
+  if (response.ok) {
+    // Success!
+    console.log(response.data); // Response data -> User
+  } else {
+    // Some error, but at least we got a response
   }
-  throw new Error("All retries failed");
+} else {
+  // Connection refused, no response
 }
 ```

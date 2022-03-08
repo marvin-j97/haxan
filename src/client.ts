@@ -9,14 +9,14 @@ import {
   IHaxanOptions,
   IHaxanResponse,
 } from "./types";
-import {
-  isBrowser,
-  stringifyQuery,
-  normalizeHeaders,
-  canHaveBody,
-} from "./util";
+import { isBrowser, stringifyQuery, normalizeHeaders } from "./util";
 
-type HaxanRequestReturnType<T, E> = Result<IHaxanResponse<T>, HaxanError<E>>;
+export { Ok, Err, Result };
+
+export type HaxanRequestReturnType<T, E> = Result<
+  IHaxanResponse<T>,
+  HaxanError<E>
+>;
 
 function timeout(timeMs: number): Promise<void> {
   return new Promise((_resolve, reject) =>
@@ -247,9 +247,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
       const res = await this._fetch()(this.buildUrl(), {
         method: this._opts.method,
         headers,
-        body: canHaveBody(this._opts.method)
-          ? this.normalizedBody()
-          : undefined,
+        body: this.normalizedBody(),
         signal: this._opts.abortSignal,
         redirect: this._opts.redirect,
         ...this._addOptions,

@@ -1,5 +1,3 @@
-import { HTTPMethod } from "./types";
-
 export function isBrowser(): boolean {
   return (
     typeof window !== "undefined" &&
@@ -19,12 +17,4 @@ export function normalizeHeaders(headers: Headers): Record<string, string> {
     normalized[k] = v;
   });
   return normalized;
-}
-
-export function canHaveBody(method: string): boolean {
-  return (<string[]>[
-    HTTPMethod.Put,
-    HTTPMethod.Post,
-    HTTPMethod.Patch,
-  ]).includes(method.toUpperCase());
 }
