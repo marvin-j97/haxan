@@ -168,6 +168,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         return {
           data: await this.parseBody(res),
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         };
@@ -175,6 +176,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         return {
           data: await res.json(),
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         };
@@ -182,6 +184,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         return {
           data: <T>(<unknown>await res.text()),
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         };
@@ -189,6 +192,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         return {
           data: <T>(<unknown>await res.blob()),
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         };
@@ -196,6 +200,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         return {
           data: <T>(<unknown>await res.arrayBuffer()),
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         };
@@ -203,6 +208,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         return {
           data: <T>(<unknown>res.body),
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         };
@@ -215,6 +221,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
         {
           data: res.body,
           ok: res.ok,
+          redirected: res.redirected,
           status: res.status,
           headers: resHeaders,
         },

@@ -43,6 +43,7 @@ export interface IHaxanOptions {
 export interface IHaxanResponse<T> {
   data: T;
   ok: boolean;
+  redirected: boolean;
   status: number;
   headers: Record<string, string>;
 }
