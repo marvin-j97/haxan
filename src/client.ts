@@ -51,7 +51,7 @@ export class HaxanFactory<T = unknown> {
 
   constructor(
     url: string,
-    _fetch?: any,
+    _fetch?: () => typeof fetch,
     opts?: Partial<Omit<IHaxanOptions, "url">>,
   ) {
     if (opts) {
@@ -295,7 +295,7 @@ export class HaxanFactory<T = unknown> {
  */
 export function createHaxanFactory<T>(
   url: string,
-  _fetch?: any,
+  _fetch?: () => typeof fetch,
   opts?: Partial<Omit<IHaxanOptions, "url">>,
 ): HaxanFactory<T> {
   return new HaxanFactory(url, _fetch, opts);

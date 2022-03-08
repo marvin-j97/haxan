@@ -6,17 +6,18 @@
   <a href="https://codecov.io/gh/marvin-j97/haxan">
     <img src="https://codecov.io/gh/marvin-j97/haxan/branch/dev/graph/badge.svg?token=HG18ZHO57K"/>
   </a>
-  <img src="https://img.shields.io/david/dotvirus/haxan" alt="Dependencies">
   <img src="https://img.shields.io/bundlephobia/minzip/haxan" alt="Zipped size">
   <img src="https://img.shields.io/npm/dw/haxan" alt="Downloads">
 </p>
 
-Intuitive HTTP client for browsers and Node.js servers.
+Intuitive, isomorphic HTTP client, tailored for Typescript usage.
 
 ### Installation
 
 ```
 npm i haxan
+yarn add haxan
+pnpm add haxan
 ```
 
 Or use the .min.js bundle.
@@ -51,6 +52,8 @@ Haxan<User>("http://localhost:3000/api/user/1234")
 Setting query parameters
 
 ```typescript
+import Haxan from "haxan";
+
 Haxan<string>("http://google.com/search")
   .param("q", "Elephants") // -> http://google.com/search?q=Elephants
   .request()
@@ -65,6 +68,8 @@ Haxan<string>("http://google.com/search")
 Sending a JSON payload with `POST`
 
 ```typescript
+import Haxan from "haxan";
+
 const payload = {
   id: 4,
   user_name: "@testname",
@@ -84,7 +89,10 @@ Haxan("http://localhost:3000/api/user")
 Download a file in Node.js
 
 ```typescript
-Haxan<fs.ReadStream>("https://bit.ly/3k19d8D")
+import Haxan from "haxan";
+import crossFetch from "cross-fetch";
+
+Haxan<fs.ReadStream>("https://bit.ly/3k19d8D", crossFetch)
   .type(Haxan.ResponseType.Stream)
   .send()
   .then((response) => {
@@ -98,6 +106,8 @@ Haxan<fs.ReadStream>("https://bit.ly/3k19d8D")
 Sending other kinds of content
 
 ```typescript
+import Haxan from "haxan";
+
 // Use a different Content-Type instead
 Haxan("http://localhost:3000/api/note")
   .header("Content-Type", "text/yaml")
@@ -142,6 +152,8 @@ signRequest(Haxan("/api/v1/endpoint"))
 Retry failed requests (example)
 
 ```typescript
+import Haxan from "haxan";
+
 async function withRetries<T>(
   request: HaxanFactory<T>,
   retries = 3,
