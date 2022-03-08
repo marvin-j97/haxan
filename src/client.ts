@@ -35,7 +35,7 @@ function timeout(timeMs: number): Promise<void> {
  * and a chainable API
  */
 export class HaxanFactory<T = unknown> {
-  private _fetch: typeof fetch;
+  private _fetch: () => typeof fetch;
   private _opts: IHaxanOptions = {
     url: "",
     headers: {},
@@ -57,7 +57,7 @@ export class HaxanFactory<T = unknown> {
     if (opts) {
       Object.assign(this._opts, opts);
     }
-    this._fetch = _fetch || fetch;
+    this._fetch = _fetch || (() => fetch);
     this.url(url);
   }
 
@@ -255,7 +255,7 @@ export class HaxanFactory<T = unknown> {
         headers["User-Agent"] = `Haxan ${VERSION}`;
       }
 
-      const res: Response = await this._fetch(this.buildUrl(), {
+      const res: Response = await this._fetch()(this.buildUrl(), {
         method: this._opts.method,
         headers,
         body: canHaveBody(this._opts.method)
