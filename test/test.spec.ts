@@ -299,7 +299,7 @@ test.serial("Send header", async (t) => {
   const url = "http://localhost:8080/headers";
   const headerKey = "x-test";
   const headerValue = "12345";
-  const result = await haxan(url, nodeFetchPolyfill)
+  const result = await haxan<Record<string, string>>(url, nodeFetchPolyfill)
     .header(headerKey, headerValue)
     .request();
 
