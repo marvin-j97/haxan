@@ -65,15 +65,16 @@
 					<a href="https://codecov.io/gh/marvin-j97/haxan">
 						<img src="https://codecov.io/gh/marvin-j97/haxan/branch/dev/graph/badge.svg?token=HG18ZHO57K"/>
 					</a>
-					<img src="https://img.shields.io/david/dotvirus/haxan" alt="Dependencies">
 					<img src="https://img.shields.io/bundlephobia/minzip/haxan" alt="Zipped size">
 					<img src="https://img.shields.io/npm/dw/haxan" alt="Downloads">
 				</p>
-				<p>Intuitive HTTP client for browsers and Node.js servers.</p>
+				<p>Intuitive, isomorphic HTTP client, tailored for Typescript usage.</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h3>Installation</h3>
 				</a>
 				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #001080">haxan</span>
+<span style="color: #001080">yarn</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> </span><span style="color: #001080">haxan</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">add</span><span style="color: #000000"> </span><span style="color: #001080">haxan</span>
 </code></pre>
 				<p>Or use the .min.js bundle.</p>
 				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
@@ -102,7 +103,9 @@
 <span style="color: #000000">  });</span>
 </code></pre>
 				<p>Setting query parameters</p>
-				<pre><code class="language-typescript"><span style="color: #795E26">Haxan</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000">&gt;(</span><span style="color: #A31515">&quot;http://google.com/search&quot;</span><span style="color: #000000">)</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Haxan</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;haxan&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #795E26">Haxan</span><span style="color: #000000">&lt;</span><span style="color: #267F99">string</span><span style="color: #000000">&gt;(</span><span style="color: #A31515">&quot;http://google.com/search&quot;</span><span style="color: #000000">)</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">param</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;q&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Elephants&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// -&gt; http://google.com/search?q=Elephants</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">request</span><span style="color: #000000">()</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">response</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
@@ -113,7 +116,9 @@
 <span style="color: #000000">  });</span>
 </code></pre>
 				<p>Sending a JSON payload with <code>POST</code></p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">payload</span><span style="color: #000000"> = {</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Haxan</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;haxan&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">payload</span><span style="color: #000000"> = {</span>
 <span style="color: #000000">  </span><span style="color: #001080">id:</span><span style="color: #000000"> </span><span style="color: #098658">4</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">user_name:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@testname&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">};</span>
@@ -129,7 +134,10 @@
 <span style="color: #000000">  });</span>
 </code></pre>
 				<p>Download a file in Node.js</p>
-				<pre><code class="language-typescript"><span style="color: #795E26">Haxan</span><span style="color: #000000">&lt;</span><span style="color: #267F99">fs</span><span style="color: #000000">.</span><span style="color: #267F99">ReadStream</span><span style="color: #000000">&gt;(</span><span style="color: #A31515">&quot;https://bit.ly/3k19d8D&quot;</span><span style="color: #000000">)</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Haxan</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;haxan&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">crossFetch</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;cross-fetch&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #795E26">Haxan</span><span style="color: #000000">&lt;</span><span style="color: #267F99">fs</span><span style="color: #000000">.</span><span style="color: #267F99">ReadStream</span><span style="color: #000000">&gt;(</span><span style="color: #A31515">&quot;https://bit.ly/3k19d8D&quot;</span><span style="color: #000000">, </span><span style="color: #001080">crossFetch</span><span style="color: #000000">)</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">type</span><span style="color: #000000">(</span><span style="color: #001080">Haxan</span><span style="color: #000000">.</span><span style="color: #001080">ResponseType</span><span style="color: #000000">.</span><span style="color: #001080">Stream</span><span style="color: #000000">)</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">send</span><span style="color: #000000">()</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">then</span><span style="color: #000000">((</span><span style="color: #001080">response</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
@@ -140,7 +148,9 @@
 <span style="color: #000000">  });</span>
 </code></pre>
 				<p>Sending other kinds of content</p>
-				<pre><code class="language-typescript"><span style="color: #008000">// Use a different Content-Type instead</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Haxan</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;haxan&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #008000">// Use a different Content-Type instead</span>
 <span style="color: #795E26">Haxan</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://localhost:3000/api/note&quot;</span><span style="color: #000000">)</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">header</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Content-Type&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;text/yaml&quot;</span><span style="color: #000000">)</span>
 <span style="color: #000000">  .</span><span style="color: #795E26">post</span><span style="color: #000000">(</span>
@@ -178,7 +188,9 @@
 <span style="color: #000000">  });</span>
 </code></pre>
 				<p>Retry failed requests (example)</p>
-				<pre><code class="language-typescript"><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">withRetries</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;(</span>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Haxan</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;haxan&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">withRetries</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;(</span>
 <span style="color: #000000">  </span><span style="color: #001080">request</span><span style="color: #000000">: </span><span style="color: #267F99">HaxanFactory</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;,</span>
 <span style="color: #000000">  </span><span style="color: #001080">retries</span><span style="color: #000000"> = </span><span style="color: #098658">3</span><span style="color: #000000">,</span>
 <span style="color: #000000">): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">IHaxanResponse</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;&gt; {</span>

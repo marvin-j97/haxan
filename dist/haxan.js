@@ -4,7 +4,7 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Haxan = {}));
 }(this, (function (exports) { 'use strict';
 
-    var VERSION = "0.6.0";
+    var VERSION = "0.6.1";
 
     exports.HaxanErrorType = void 0;
     (function (HaxanErrorType) {
@@ -182,7 +182,7 @@
             if (opts) {
                 Object.assign(this._opts, opts);
             }
-            this._fetch = _fetch || fetch;
+            this._fetch = _fetch || (function () { return fetch; });
             this.url(url);
         }
         HaxanFactory.prototype.setProp = function (key, value) {
@@ -374,7 +374,7 @@
                             if (typeof window === "undefined") {
                                 headers["User-Agent"] = "Haxan " + VERSION;
                             }
-                            return [4 /*yield*/, this._fetch(this.buildUrl(), __assign({ method: this._opts.method, headers: headers, body: canHaveBody(this._opts.method)
+                            return [4 /*yield*/, this._fetch()(this.buildUrl(), __assign({ method: this._opts.method, headers: headers, body: canHaveBody(this._opts.method)
                                         ? this.normalizedBody()
                                         : undefined, signal: this._opts.abortSignal, redirect: this._opts.redirect }, this._addOptions))];
                         case 1:

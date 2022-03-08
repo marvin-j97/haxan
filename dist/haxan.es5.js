@@ -7,7 +7,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 })(void 0, function (exports) {
   'use strict';
 
-  var VERSION = "0.6.0";
+  var VERSION = "0.6.1";
   exports.HaxanErrorType = void 0;
 
   (function (HaxanErrorType) {
@@ -327,7 +327,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         Object.assign(this._opts, opts);
       }
 
-      this._fetch = _fetch || fetch;
+      this._fetch = _fetch || function () {
+        return fetch;
+      };
+
       this.url(url);
     }
 
@@ -609,7 +612,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               return [4
               /*yield*/
-              , this._fetch(this.buildUrl(), __assign({
+              , this._fetch()(this.buildUrl(), __assign({
                 method: this._opts.method,
                 headers: headers,
                 body: canHaveBody(this._opts.method) ? this.normalizedBody() : undefined,

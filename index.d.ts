@@ -94,7 +94,7 @@ declare class HaxanFactory<T = unknown> {
     private _fetch;
     private _opts;
     private _addOptions;
-    constructor(url: string, _fetch?: any, opts?: Partial<Omit<IHaxanOptions, "url">>);
+    constructor(url: string, _fetch?: () => typeof fetch, opts?: Partial<Omit<IHaxanOptions, "url">>);
     private setProp;
     redirect(value: "follow" | "manual"): this;
     addOptions<T extends Record<string, unknown>>(opts: T): this;
@@ -126,7 +126,7 @@ declare class HaxanFactory<T = unknown> {
 /**
  * Creates a new Haxan instance
  */
-declare function createHaxanFactory<T>(url: string, _fetch?: any, opts?: Partial<Omit<IHaxanOptions, "url">>): HaxanFactory<T>;
+declare function createHaxanFactory<T>(url: string, _fetch?: () => typeof fetch, opts?: Partial<Omit<IHaxanOptions, "url">>): HaxanFactory<T>;
 
 declare const _default: typeof createHaxanFactory & typeof types & {
     HaxanFactory: typeof HaxanFactory;
