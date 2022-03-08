@@ -42,38 +42,50 @@ before(() => {
 
 test.serial("200", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const res = await haxan(url, nodeFetchPolyfill)
+  const result = await haxan(url, nodeFetchPolyfill)
     .param("query", "hello")
     .param("page", 4)
     .request();
 
-  t.is(res.status, 200);
-  t.is(res.ok, true);
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("404", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/15125125";
-  const res = await haxan(url, nodeFetchPolyfill)
+  const result = await haxan(url, nodeFetchPolyfill)
     .param("query", "hello")
     .param("page", 4)
     .request();
 
-  t.is(res.status, 404);
-  t.is(res.ok, false);
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 404);
+    t.is(response.ok, false);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Network error", async (t) => {
-  t.plan(2);
+  const url = "https://.typicode.com/todos/15125125";
+  const result = await haxan(url, nodeFetchPolyfill)
+    .param("query", "hello")
+    .param("page", 4)
+    .request();
+  t.assert(result.err);
 
-  try {
-    const url = "https://.typicode.com/todos/15125125";
-    await haxan(url, nodeFetchPolyfill)
-      .param("query", "hello")
-      .param("page", 4)
-      .request();
-  } catch (error) {
+  if (result.err) {
+    const error = result.val;
     t.is(error.getType(), HaxanErrorType.NetworkError);
     t.is(error.getOriginalError()?.name, "FetchError");
+  } else {
+    t.fail();
   }
 });
 
@@ -82,25 +94,37 @@ const testBody = { name: "test!", number: 4 };
 test.serial("Send raw body", async (t) => {
   const body = JSON.stringify(testBody);
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof testBody>(url, nodeFetchPolyfill)
+  const result = await haxan<typeof testBody>(url, nodeFetchPolyfill)
     .post(body)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, testBody);
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, testBody);
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send post body as object", async (t) => {
   const body = testBody;
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+  const result = await haxan<typeof body>(url, nodeFetchPolyfill)
     .post(body)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, body);
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, body);
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });
 
 function downloadFile(source: ReadStream, output: string) {
@@ -117,152 +141,212 @@ function downloadFile(source: ReadStream, output: string) {
 
 test.serial("Download file", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const res = await haxan<ReadStream>(url, nodeFetchPolyfill)
+  const result = await haxan<ReadStream>(url, nodeFetchPolyfill)
     .type(haxan.ResponseType.Stream)
     .send();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  const file = "test.json";
-  await downloadFile(res.data, file);
-  t.is(existsSync(file), true);
-  t.is(JSON.parse(readFileSync(file, "utf-8")).id, 1);
-  unlinkSync(file);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    const file = "test.json";
+    await downloadFile(response.data, file);
+    t.is(existsSync(file), true);
+    t.is(JSON.parse(readFileSync(file, "utf-8")).id, 1);
+    unlinkSync(file);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Timeout", async (t) => {
   const url = "http://localhost:8080/no-response";
-  t.plan(1);
-  try {
-    await haxan(url, nodeFetchPolyfill).timeout(2000).request();
-  } catch (error) {
+
+  const result = await haxan(url, nodeFetchPolyfill).timeout(2000).request();
+
+  if (result.err) {
+    const error = result.val;
     t.is(error.getType(), HaxanErrorType.Timeout);
+  } else {
+    t.fail();
   }
 });
 
-test.serial("Abort", (t) => {
-  return new Promise(async (resolve, reject) => {
-    t.plan(1);
-    try {
-      const abortController = new AbortController();
-      setTimeout(() => {
-        abortController.abort();
-      }, 2000);
+test.serial("Abort", async (t) => {
+  const abortController = new AbortController();
+  setTimeout(() => {
+    abortController.abort();
+  }, 2000);
 
-      const url = "http://localhost:8080/no-response";
-      await haxan(url, nodeFetchPolyfill)
-        .abort(abortController.signal)
-        .request();
-      reject();
-    } catch (error) {
-      t.is(error.getType(), HaxanErrorType.Abort);
-      resolve();
-    }
-  });
+  const url = "http://localhost:8080/no-response";
+  const result = await haxan(url, nodeFetchPolyfill)
+    .abort(abortController.signal)
+    .request();
+
+  if (result.err) {
+    const error = result.val;
+    t.is(error.getType(), HaxanErrorType.Abort);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send patch body", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+  const result = await haxan<typeof body>(url, nodeFetchPolyfill)
     .patch(body)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, body);
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, body);
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send delete", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, nodeFetchPolyfill).delete().request();
-  t.assert(res.ok);
-  t.is(res.data, HTTPMethod.Delete);
+  const result = await haxan(url, nodeFetchPolyfill).delete().request();
+
+  if (result.ok) {
+    const response = result.val;
+    t.assert(response.ok);
+    t.is(response.data, HTTPMethod.Delete);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send get", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, nodeFetchPolyfill).get().request();
-  t.assert(res.ok);
-  t.is(res.data, HTTPMethod.Get);
+  const result = await haxan(url, nodeFetchPolyfill).get().request();
+
+  if (result.ok) {
+    const response = result.val;
+    t.assert(response.ok);
+    t.is(response.data, HTTPMethod.Get);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send head", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, nodeFetchPolyfill).head().request();
-  t.assert(res.ok);
-  // Express returns empty response body, because it's a HEAD request
-  t.is(res.data, "");
+  const result = await haxan(url, nodeFetchPolyfill).head().request();
+
+  if (result.ok) {
+    const response = result.val;
+    t.assert(response.ok);
+    // Express returns empty response body, because it's a HEAD request
+    t.is(response.data, "");
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send options", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, nodeFetchPolyfill).options().request();
-  t.assert(res.ok);
-  t.is(res.data, HTTPMethod.Options);
+  const result = await haxan(url, nodeFetchPolyfill).options().request();
+
+  if (result.ok) {
+    const response = result.val;
+    t.assert(response.ok);
+    t.is(response.data, HTTPMethod.Options);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send put body", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+  const result = await haxan<typeof body>(url, nodeFetchPolyfill)
     .put(body)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, body);
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, body);
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send empty body", async (t) => {
   const url = "http://localhost:8080/";
-  const res = await haxan(url, nodeFetchPolyfill).post(null).request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, {});
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
-});
+  const result = await haxan(url, nodeFetchPolyfill).post(null).request();
 
-test.serial("Use options API", async (t) => {
-  const url = "http://localhost:8080/method";
-  const res = await haxan(url, nodeFetchPolyfill, { method: "POST" }).request();
-  t.assert(res.ok);
-  t.is(res.data, HTTPMethod.Post);
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, {});
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send header", async (t) => {
   const url = "http://localhost:8080/headers";
   const headerKey = "x-test";
   const headerValue = "12345";
-  const res = await haxan<any>(url, nodeFetchPolyfill)
+  const result = await haxan<any>(url, nodeFetchPolyfill)
     .header(headerKey, headerValue)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.is(res.data[headerKey], headerValue);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.is(response.data[headerKey], headerValue);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send post body, retrieve as .text()", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<string>(url, nodeFetchPolyfill)
+  const result = await haxan<string>(url, nodeFetchPolyfill)
     .post(body)
     .type(ResponseType.Text)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, JSON.stringify(body));
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, JSON.stringify(body));
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });
 
 test.serial("Send post body, retrieve as .json()", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+  const result = await haxan<typeof body>(url, nodeFetchPolyfill)
     .post(body)
     .type(ResponseType.Json)
     .request();
-  t.is(res.status, 200);
-  t.is(res.ok, true);
-  t.deepEqual(res.data, body);
-  t.is(res.headers["content-type"].startsWith("application/json"), true);
+
+  if (result.ok) {
+    const response = result.val;
+    t.is(response.status, 200);
+    t.is(response.ok, true);
+    t.deepEqual(response.data, body);
+    t.is(response.headers["content-type"].startsWith("application/json"), true);
+  } else {
+    t.fail();
+  }
 });

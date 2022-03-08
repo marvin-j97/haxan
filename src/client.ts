@@ -1,3 +1,5 @@
+import { Ok, Err, Result } from "ts-results";
+
 import { VERSION } from "./version";
 import {
   HTTPMethod,
@@ -13,6 +15,8 @@ import {
   normalizeHeaders,
   canHaveBody,
 } from "./util";
+
+type HaxanRequestReturnType<T, E> = Result<IHaxanResponse<T>, HaxanError<E>>;
 
 function timeout(timeMs: number): Promise<void> {
   return new Promise((_resolve, reject) =>
@@ -34,7 +38,7 @@ function timeout(timeMs: number): Promise<void> {
  * Request factory, supports both options (given in constructor)
  * and a chainable API
  */
-export class HaxanFactory<T = unknown> {
+export class HaxanFactory<T = unknown, E = unknown> {
   private _fetch: () => typeof fetch;
   private _opts: IHaxanOptions = {
     url: "",
@@ -47,16 +51,9 @@ export class HaxanFactory<T = unknown> {
     timeout: 30000,
     redirect: "follow",
   };
-  private _addOptions: Record<string, unknown> = {};
+  private _addOptions: Partial<RequestInit> = {};
 
-  constructor(
-    url: string,
-    _fetch?: () => typeof fetch,
-    opts?: Partial<Omit<IHaxanOptions, "url">>,
-  ) {
-    if (opts) {
-      Object.assign(this._opts, opts);
-    }
+  constructor(url: string, _fetch?: () => typeof fetch) {
     this._fetch = _fetch || (() => fetch);
     this.url(url);
   }
@@ -73,7 +70,7 @@ export class HaxanFactory<T = unknown> {
     return this.setProp("redirect", value);
   }
 
-  addOptions<T extends Record<string, unknown>>(opts: T) {
+  addOptions(opts: Partial<RequestInit>) {
     this._addOptions = opts;
     return this;
   }
@@ -163,14 +160,6 @@ export class HaxanFactory<T = unknown> {
     return this._opts;
   }
 
-  send(): Promise<IHaxanResponse<T>> {
-    return this.execute();
-  }
-
-  execute(): Promise<IHaxanResponse<T>> {
-    return this.request();
-  }
-
   private async parseResponse(res: Response): Promise<IHaxanResponse<T>> {
     try {
       const resHeaders = normalizeHeaders(res.headers);
@@ -255,7 +244,7 @@ export class HaxanFactory<T = unknown> {
         headers["User-Agent"] = `Haxan ${VERSION}`;
       }
 
-      const res: Response = await this._fetch()(this.buildUrl(), {
+      const res = await this._fetch()(this.buildUrl(), {
         method: this._opts.method,
         headers,
         body: canHaveBody(this._opts.method)
@@ -278,15 +267,26 @@ export class HaxanFactory<T = unknown> {
     }
   }
 
-  async request(): Promise<IHaxanResponse<T>> {
-    const res = <IHaxanResponse<T>>await Promise.race([
-      // Real request promise
-      this.doRequest(),
-      // Timeout promise
-      timeout(this._opts.timeout),
-    ]);
+  send(): Promise<HaxanRequestReturnType<T, E>> {
+    return this.execute();
+  }
 
-    return res;
+  execute(): Promise<HaxanRequestReturnType<T, E>> {
+    return this.request();
+  }
+
+  async request(): Promise<HaxanRequestReturnType<T, E>> {
+    try {
+      const res = <IHaxanResponse<T>>await Promise.race([
+        // Real request promise
+        this.doRequest(),
+        // Timeout promise
+        timeout(this._opts.timeout),
+      ]);
+      return Ok(res);
+    } catch (error) {
+      return Err(error as HaxanError<E>);
+    }
   }
 }
 
@@ -296,7 +296,6 @@ export class HaxanFactory<T = unknown> {
 export function createHaxanFactory<T>(
   url: string,
   _fetch?: () => typeof fetch,
-  opts?: Partial<Omit<IHaxanOptions, "url">>,
 ): HaxanFactory<T> {
-  return new HaxanFactory(url, _fetch, opts);
+  return new HaxanFactory(url, _fetch);
 }
