@@ -1,6 +1,6 @@
 import { Ok, Err, Result } from "ts-results";
 
-import { VERSION } from "./version";
+import { userAgent, VERSION } from "./version";
 import {
   HTTPMethod,
   ResponseType,
@@ -248,7 +248,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
       };
 
       if (typeof window === "undefined") {
-        headers["User-Agent"] = `Haxan ${VERSION}`;
+        headers["User-Agent"] = userAgent;
       }
 
       const res = await this._fetch()(this.buildUrl(), {
