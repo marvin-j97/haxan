@@ -7,7 +7,7 @@ export function isBrowser(): boolean {
 
 export function stringifyQuery(params: Record<string, unknown>): string {
   return Object.keys(params)
-    .map((key) => key + "=" + String(params[key]))
+    .map((key) => `${key}=${String(params[key])}`)
     .join("&");
 }
 

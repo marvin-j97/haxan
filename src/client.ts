@@ -1,17 +1,17 @@
-import { Ok, Err, Result } from "ts-results";
+import { Err, Ok, Result } from "ts-results";
 
-import { userAgent, VERSION } from "./version";
 import {
-  HTTPMethod,
-  ResponseType,
   HaxanError,
   HaxanErrorType,
+  HTTPMethod,
   IHaxanOptions,
   IHaxanResponse,
+  ResponseType,
 } from "./types";
-import { isBrowser, stringifyQuery, normalizeHeaders } from "./util";
+import { isBrowser, normalizeHeaders, stringifyQuery } from "./util";
+import { userAgent } from "./version";
 
-export { Ok, Err, Result };
+export { Err, Ok, Result };
 
 export type HaxanRequestReturnType<T, E> = Result<
   IHaxanResponse<T>,
@@ -61,16 +61,16 @@ export class HaxanFactory<T = unknown, E = unknown> {
   private setProp<K extends keyof IHaxanOptions>(
     key: K,
     value: IHaxanOptions[K],
-  ) {
+  ): this {
     this._opts[key] = value;
     return this;
   }
 
-  redirect(value: "follow" | "manual") {
+  redirect(value: "follow" | "manual"): this {
     return this.setProp("redirect", value);
   }
 
-  addOptions(opts: Partial<RequestInit>) {
+  addOptions(opts: Partial<RequestInit>): this {
     this._addOptions = opts;
     return this;
   }
@@ -226,6 +226,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
           headers: resHeaders,
         },
       );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.type === HaxanErrorType.ParseError) {
         throw error;
@@ -261,6 +262,7 @@ export class HaxanFactory<T = unknown, E = unknown> {
       });
       const parsed = await this.parseResponse(res);
       return <IHaxanResponse<T>>(<unknown>parsed);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.getType) {
         throw error;
