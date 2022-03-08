@@ -3,6 +3,8 @@ import express from "express";
 import AbortController from "abort-controller";
 import crossFetch from "cross-fetch";
 
+const nodeFetchPolyfill = () => crossFetch;
+
 import haxan, { HaxanErrorType } from "../src/index";
 import {
   ReadStream,
@@ -40,7 +42,7 @@ before(() => {
 
 test.serial("200", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const res = await haxan(url, crossFetch)
+  const res = await haxan(url, nodeFetchPolyfill)
     .param("query", "hello")
     .param("page", 4)
     .request();
@@ -51,7 +53,7 @@ test.serial("200", async (t) => {
 
 test.serial("404", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/15125125";
-  const res = await haxan(url, crossFetch)
+  const res = await haxan(url, nodeFetchPolyfill)
     .param("query", "hello")
     .param("page", 4)
     .request();
@@ -65,7 +67,7 @@ test.serial("Network error", async (t) => {
 
   try {
     const url = "https://.typicode.com/todos/15125125";
-    await haxan(url, crossFetch)
+    await haxan(url, nodeFetchPolyfill)
       .param("query", "hello")
       .param("page", 4)
       .request();
@@ -80,7 +82,7 @@ const testBody = { name: "test!", number: 4 };
 test.serial("Send raw body", async (t) => {
   const body = JSON.stringify(testBody);
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof testBody>(url, crossFetch)
+  const res = await haxan<typeof testBody>(url, nodeFetchPolyfill)
     .post(body)
     .request();
   t.is(res.status, 200);
@@ -92,7 +94,9 @@ test.serial("Send raw body", async (t) => {
 test.serial("Send post body as object", async (t) => {
   const body = testBody;
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, crossFetch).post(body).request();
+  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+    .post(body)
+    .request();
   t.is(res.status, 200);
   t.is(res.ok, true);
   t.deepEqual(res.data, body);
@@ -113,7 +117,7 @@ function downloadFile(source: ReadStream, output: string) {
 
 test.serial("Download file", async (t) => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
-  const res = await haxan<ReadStream>(url, crossFetch)
+  const res = await haxan<ReadStream>(url, nodeFetchPolyfill)
     .type(haxan.ResponseType.Stream)
     .send();
   t.is(res.status, 200);
@@ -129,7 +133,7 @@ test.serial("Timeout", async (t) => {
   const url = "http://localhost:8080/no-response";
   t.plan(1);
   try {
-    await haxan(url, crossFetch).timeout(2000).request();
+    await haxan(url, nodeFetchPolyfill).timeout(2000).request();
   } catch (error) {
     t.is(error.getType(), HaxanErrorType.Timeout);
   }
@@ -145,7 +149,9 @@ test.serial("Abort", (t) => {
       }, 2000);
 
       const url = "http://localhost:8080/no-response";
-      await haxan(url, crossFetch).abort(abortController.signal).request();
+      await haxan(url, nodeFetchPolyfill)
+        .abort(abortController.signal)
+        .request();
       reject();
     } catch (error) {
       t.is(error.getType(), HaxanErrorType.Abort);
@@ -157,7 +163,9 @@ test.serial("Abort", (t) => {
 test.serial("Send patch body", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, crossFetch).patch(body).request();
+  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+    .patch(body)
+    .request();
   t.is(res.status, 200);
   t.is(res.ok, true);
   t.deepEqual(res.data, body);
@@ -166,21 +174,21 @@ test.serial("Send patch body", async (t) => {
 
 test.serial("Send delete", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, crossFetch).delete().request();
+  const res = await haxan(url, nodeFetchPolyfill).delete().request();
   t.assert(res.ok);
   t.is(res.data, HTTPMethod.Delete);
 });
 
 test.serial("Send get", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, crossFetch).get().request();
+  const res = await haxan(url, nodeFetchPolyfill).get().request();
   t.assert(res.ok);
   t.is(res.data, HTTPMethod.Get);
 });
 
 test.serial("Send head", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, crossFetch).head().request();
+  const res = await haxan(url, nodeFetchPolyfill).head().request();
   t.assert(res.ok);
   // Express returns empty response body, because it's a HEAD request
   t.is(res.data, "");
@@ -188,7 +196,7 @@ test.serial("Send head", async (t) => {
 
 test.serial("Send options", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, crossFetch).options().request();
+  const res = await haxan(url, nodeFetchPolyfill).options().request();
   t.assert(res.ok);
   t.is(res.data, HTTPMethod.Options);
 });
@@ -196,7 +204,9 @@ test.serial("Send options", async (t) => {
 test.serial("Send put body", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, crossFetch).put(body).request();
+  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
+    .put(body)
+    .request();
   t.is(res.status, 200);
   t.is(res.ok, true);
   t.deepEqual(res.data, body);
@@ -205,7 +215,7 @@ test.serial("Send put body", async (t) => {
 
 test.serial("Send empty body", async (t) => {
   const url = "http://localhost:8080/";
-  const res = await haxan(url, crossFetch).post(null).request();
+  const res = await haxan(url, nodeFetchPolyfill).post(null).request();
   t.is(res.status, 200);
   t.is(res.ok, true);
   t.deepEqual(res.data, {});
@@ -214,7 +224,7 @@ test.serial("Send empty body", async (t) => {
 
 test.serial("Use options API", async (t) => {
   const url = "http://localhost:8080/method";
-  const res = await haxan(url, crossFetch, { method: "POST" }).request();
+  const res = await haxan(url, nodeFetchPolyfill, { method: "POST" }).request();
   t.assert(res.ok);
   t.is(res.data, HTTPMethod.Post);
 });
@@ -223,7 +233,7 @@ test.serial("Send header", async (t) => {
   const url = "http://localhost:8080/headers";
   const headerKey = "x-test";
   const headerValue = "12345";
-  const res = await haxan<any>(url, crossFetch)
+  const res = await haxan<any>(url, nodeFetchPolyfill)
     .header(headerKey, headerValue)
     .request();
   t.is(res.status, 200);
@@ -234,7 +244,7 @@ test.serial("Send header", async (t) => {
 test.serial("Send post body, retrieve as .text()", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<string>(url, crossFetch)
+  const res = await haxan<string>(url, nodeFetchPolyfill)
     .post(body)
     .type(ResponseType.Text)
     .request();
@@ -247,7 +257,7 @@ test.serial("Send post body, retrieve as .text()", async (t) => {
 test.serial("Send post body, retrieve as .json()", async (t) => {
   const body = { name: "test!", number: 4 };
   const url = "http://localhost:8080/";
-  const res = await haxan<typeof body>(url, crossFetch)
+  const res = await haxan<typeof body>(url, nodeFetchPolyfill)
     .post(body)
     .type(ResponseType.Json)
     .request();
