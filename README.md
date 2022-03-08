@@ -92,7 +92,7 @@ Download a file in Node.js
 import Haxan from "haxan";
 import crossFetch from "cross-fetch";
 
-Haxan<fs.ReadStream>("https://bit.ly/3k19d8D", crossFetch)
+Haxan<fs.ReadStream>("https://bit.ly/3k19d8D", () => crossFetch)
   .type(Haxan.ResponseType.Stream)
   .send()
   .then((response) => {
