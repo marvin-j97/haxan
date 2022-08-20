@@ -14,19 +14,16 @@ import {
   canHaveBody,
 } from "./util";
 
-function timeout(timeMs: number): Promise<void> {
-  return new Promise((_resolve, reject) =>
-    setTimeout(
-      () =>
-        reject(
-          new HaxanError(
-            HaxanErrorType.Timeout,
-            `Request timed out (Reached ${timeMs}ms)`,
-            null,
-          ),
-        ),
-      timeMs,
-    ),
+function sleep(timeMs: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, timeMs));
+}
+
+async function timeout(timeMs: number): Promise<void> {
+  await sleep(timeMs);
+  throw new HaxanError(
+    HaxanErrorType.Timeout,
+    `Request timed out (Reached ${timeMs}ms)`,
+    null,
   );
 }
 
@@ -123,7 +120,7 @@ export class HaxanFactory<T = unknown> {
   }
 
   header(name: string, value: string): this {
-    this._opts.headers[name] = value;
+    this._opts.headers[name.toLowerCase()] = value;
     return this;
   }
 
@@ -247,12 +244,12 @@ export class HaxanFactory<T = unknown> {
   private async doRequest<T>(): Promise<IHaxanResponse<T>> {
     try {
       const headers: Record<string, string> = {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
         ...this._opts.headers,
       };
 
       if (typeof window === "undefined") {
-        headers["User-Agent"] = `Haxan ${VERSION}`;
+        headers["user-agent"] = `Haxan ${VERSION}`;
       }
 
       const res: Response = await this._fetch()(this.buildUrl(), {

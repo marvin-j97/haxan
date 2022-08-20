@@ -20,8 +20,6 @@ yarn add haxan
 pnpm add haxan
 ```
 
-Or use the .min.js bundle.
-
 ### Examples
 
 Using `GET` to fetch a user from an API
