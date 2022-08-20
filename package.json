@@ -17,7 +17,6 @@
   },
   "scripts": {
     "coverage": "vitest run --coverage",
-    "postcoverage": "nyc report --reporter=json",
     "doc": "rm -rf docs && typedoc --out docs src && touch docs/.nojekyll",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --fix --ext .ts",
