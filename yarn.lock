@@ -532,13 +532,13 @@
   resolved "https://registry.yarnpkg.com/@tinyhttp/forwarded/-/forwarded-2.0.4.tgz#e5c35a949c601c8aa0afb440fc2618f1b68646ae"
   integrity sha512-HRSLYirUdjV2wr0neR4M1nxsO9inz4fheMjdqGYUDkw+axLxtNDreAXuSCDcWku43ovcM0Pbuj35Jrm0NKVYBw==
 
-"@tinyhttp/logger@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@tinyhttp/logger/-/logger-1.3.0.tgz#3924b16449277ac9e950e8d70fb26ce5d16c4327"
-  integrity sha512-u8vbW8OEPur3ZlkJGNO+Nl/xw78cdIaDAcWMUEg7o3UY9L5xezMQcLBPX8ykJLEB+Yl+BDmTvt1s1LzkwM6mNQ==
+"@tinyhttp/logger@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@tinyhttp/logger/-/logger-1.3.2.tgz#9c74cc0c92cbaac573aad93553c1f1a728eed569"
+  integrity sha512-V6KS/yB9lWcp1xzRXGQCJGjZEgRxAVte8eaH3QQ/UQB+fP4N60KDHAJcOlqxUSVxay2Lhk8L7MpIKXHubKsz3Q==
   dependencies:
-    colorette "^1.2.2"
-    dayjs "^1.10.4"
+    colorette "^2.0.19"
+    dayjs "^1.11.7"
     http-status-emojis "^2.2.0"
 
 "@tinyhttp/proxy-addr@2.0.4":
@@ -1029,6 +1029,11 @@ colorette@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
 
+colorette@^2.0.19:
+  version "2.0.19"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-2.0.19.tgz#cdf044f47ad41a0f4b56b3a0d5b4e6e1a2d5a798"
+  integrity sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==
+
 commander@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
@@ -1067,10 +1072,10 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-dayjs@^1.10.4:
-  version "1.11.5"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.5.tgz#00e8cc627f231f9499c19b38af49f56dc0ac5e93"
-  integrity sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==
+dayjs@^1.11.7:
+  version "1.11.7"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.7.tgz#4b296922642f70999544d1144a2c25730fce63e2"
+  integrity sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==
 
 debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   version "4.3.1"
